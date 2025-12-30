@@ -1,0 +1,326 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import CTA from '../../components/CTA.astro';
+import ProductMockup from '../../components/ProductMockup.astro';
+
+const features = [
+  {
+    icon: 'dollar',
+    title: 'Zero Monthly Fees',
+    description: 'Pay once and own your store forever. No subscription fees eating into your margins.',
+  },
+  {
+    icon: 'globe',
+    title: 'Managed Hosting',
+    description: 'Fast, secure, and reliable hosting included. We handle the infrastructure so you can focus on selling.',
+  },
+  {
+    icon: 'image',
+    title: 'AI Image Generation',
+    description: 'Upload one image and AI generates multiple product angles with automatic alt text for SEO.',
+  },
+  {
+    icon: 'chat',
+    title: 'WhatsApp Integration',
+    description: 'Connect with customers instantly through WhatsApp for orders, support, and notifications.',
+  },
+  {
+    icon: 'sparkles',
+    title: 'Gemini AI Built-In',
+    description: 'Leverage Google\'s Gemini AI for product descriptions, customer queries, and smart recommendations.',
+  },
+  {
+    icon: 'creditcard',
+    title: 'Stripe Payments',
+    description: 'Secure payment processing with Stripe. Accept cards, Apple Pay, Google Pay, and more.',
+  },
+  {
+    icon: 'users',
+    title: 'Role-Based Access',
+    description: 'Create different user roles for staff. Control who can access what in your back-office.',
+  },
+  {
+    icon: 'chart',
+    title: 'Advanced Analytics',
+    description: 'Track orders, revenue, bounce rates, and customer behavior with comprehensive dashboards.',
+  },
+  {
+    icon: 'search',
+    title: 'E-commerce SEO',
+    description: 'Built-in SEO optimization with schema markup, sitemaps, meta tags, and fast page loads.',
+  },
+  {
+    icon: 'zap',
+    title: 'Lightning Fast',
+    description: 'Optimized for Core Web Vitals. Your store loads in milliseconds, not seconds.',
+  },
+  {
+    icon: 'document',
+    title: 'Audit Trail',
+    description: 'Track every change made in your back-office. Know who did what and when.',
+  },
+  {
+    icon: 'cog',
+    title: 'Automated Tasks',
+    description: 'Automate inventory updates, order notifications, and routine back-office tasks.',
+  },
+];
+
+const comparisonColumns = [
+  { name: 'Shopify', highlight: false },
+  { name: 'WooCommerce', highlight: false },
+  { name: 'Autometa', highlight: true },
+];
+
+const comparisonRows = [
+  { feature: 'Monthly Cost', values: ['$29-$299/mo', '$0-$25/mo + hosting', '$0 forever'] },
+  { feature: 'Transaction Fees', values: ['0.5-2%', '0%', '0%'] },
+  { feature: 'Managed Hosting', values: [true, false, true] },
+  { feature: 'AI Image Generation', values: [false, false, true] },
+  { feature: 'AI Alt Text', values: [false, false, true] },
+  { feature: 'WhatsApp Integration', values: ['Add-on', 'Plugin', true] },
+  { feature: 'Built-in SEO', values: [true, 'Plugin', true] },
+  { feature: 'Role-Based Access', values: ['Advanced plans', 'Plugin', true] },
+  { feature: 'Audit Trail', values: [false, false, true] },
+  { feature: 'Custom Development', values: ['Limited', 'Complex', 'Included'] },
+  { feature: 'Unlimited Products', values: ['All plans', true, true] },
+  { feature: 'Performance', values: ['Good', 'Varies', 'Excellent'] },
+];
+
+const backOfficeFeatures = [
+  'Order management and tracking',
+  'Customer database with purchase history',
+  'Inventory management with low-stock alerts',
+  'Discount codes and promotions',
+  'Multiple user roles (Admin, Manager, Staff)',
+  'Revenue reports and analytics',
+  'Website traffic and conversion tracking',
+  'Export data to CSV/Excel',
+];
+---
+
+<Layout
+  title="E-Commerce Platform"
+  description="Launch your online store with a one-time payment. No monthly fees, managed hosting, AI features, and e-commerce SEO built in. Own your store forever."
+>
+  <!-- Hero Section -->
+  <Hero
+    badge="E-Commerce Solution"
+    title="Launch Your Store."
+    highlight="Pay Once. Own Forever."
+    subtitle="Unlike Shopify, WooCommerce, or BigCommerce, we don't charge you monthly. Get a fully-featured, AI-powered e-commerce store with a one-time investment."
+    primaryCta={{ text: 'Get Your Store', href: '/contact' }}
+    secondaryCta={{ text: 'See Features', href: '#features' }}
+    pattern="dots"
+    image={{ src: '/images/dashboard-mockup.png', alt: 'E-Commerce Platform Dashboard' }}
+  />
+
+  <!-- Problem Section -->
+  <section class="py-20 lg:py-28 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-blue-400 font-medium mb-4 block">The Problem</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            Traditional Platforms Are Draining Your Profits
+          </h2>
+          <p class="text-lg text-slate-400 mb-8">
+            Most e-commerce platforms charge monthly fees that add up quickly. Shopify starts at $29/month but quickly climbs to $299+ for essential features. Add transaction fees, apps, and plugins - you're paying thousands annually just for the privilege of selling.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span class="text-slate-300">Shopify Basic: $348/year minimum + transaction fees</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span class="text-slate-300">WooCommerce: "Free" but hosting + plugins = $500+/year</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span class="text-slate-300">BigCommerce: $348-$1,188/year + hidden costs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gradient-border p-8">
+          <h3 class="text-2xl font-bold text-white mb-6">The Autometa Difference</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">One-time payment, no recurring fees</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Zero transaction fees on your sales</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">All features included - no paid add-ons</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Managed hosting included forever</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Custom-built for your specific needs</span>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-700">
+            <div class="text-center">
+              <div class="text-4xl font-bold gradient-text">$0/month</div>
+              <div class="text-slate-400 mt-1">for the lifetime of your store</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-blue-400 font-medium mb-4 block">Features</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Everything You Need to Sell Online
+        </h2>
+        <p class="text-lg text-slate-400">
+          A complete e-commerce solution with AI-powered features, integrations, and a powerful back-office.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {features.map((feature) => (
+          <FeatureCard
+            icon={feature.icon}
+            title={feature.title}
+            description={feature.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Showcase Section -->
+  <section class="py-20 lg:py-28 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-blue-400 font-medium mb-4 block">See It In Action</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Your Powerful Back-Office
+        </h2>
+        <p class="text-lg text-slate-400">
+          Manage products, orders, customers, and analytics from one intuitive dashboard. No technical expertise required.
+        </p>
+      </div>
+
+      <!-- TODO: Replace these with actual e-commerce screenshots -->
+      <ProductMockup
+        layout="double"
+        images={[
+          { src: '/images/jobs-timeline-mockup.png', alt: 'Order Management Dashboard', caption: 'Track orders from placement to delivery' },
+          { src: '/images/jobs-list-mockup.png', alt: 'Product Management', caption: 'Manage your entire product catalog with ease' },
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- Back-Office Section -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="order-2 lg:order-1">
+          <div class="gradient-border p-8">
+            <h3 class="text-xl font-bold text-white mb-6">Back-Office Features</h3>
+            <div class="grid sm:grid-cols-2 gap-4">
+              {backOfficeFeatures.map((feature) => (
+                <div class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-slate-300 text-sm">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="text-blue-400 font-medium mb-4 block">Powerful Back-Office</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            Manage Everything From One Dashboard
+          </h2>
+          <p class="text-lg text-slate-400 mb-6">
+            Your back-office is where you control everything. Track orders, manage inventory, view analytics, and handle customer relationships - all from a fast, intuitive interface.
+          </p>
+          <p class="text-lg text-slate-400">
+            With role-based access, you can add staff members with specific permissions. Track every action with a complete audit trail. Export data anytime for your records.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-blue-400 font-medium mb-4 block">Comparison</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          How We Stack Up Against the Competition
+        </h2>
+        <p class="text-lg text-slate-400">
+          See why Autometa is the smarter choice for your e-commerce business.
+        </p>
+      </div>
+
+      <div class="gradient-border p-6 lg:p-8">
+        <ComparisonTable columns={comparisonColumns} rows={comparisonRows} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="py-20 lg:py-28 bg-slate-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Testimonial
+        quote="We were paying over $400/month on Shopify with all the apps we needed. Autometa built us a custom store with everything included for a one-time fee. We've saved thousands and our store is actually faster now."
+        author="Sarah M."
+        role="Founder"
+        company="Fashion Boutique"
+      />
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTA
+    title="Ready to Launch Your Store?"
+    subtitle="Get a custom e-commerce platform built for your business. No monthly fees, no surprises."
+    primaryCta={{ text: 'Get a Free Quote', href: '/contact' }}
+    secondaryCta={{ text: 'Book a Demo', href: '/contact' }}
+  />
+</Layout>

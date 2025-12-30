@@ -1,0 +1,412 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import CTA from '../../components/CTA.astro';
+import ProductMockup from '../../components/ProductMockup.astro';
+
+const features = [
+  {
+    icon: 'document',
+    title: 'Job Management',
+    description: 'Create, track, and manage detailing jobs from start to finish. See job status, time taken, and assignment at a glance.',
+  },
+  {
+    icon: 'receipt',
+    title: 'Estimate to Invoice',
+    description: 'Full workflow from estimate creation to quotation to final invoice. Convert with one click and track the entire journey.',
+  },
+  {
+    icon: 'license',
+    title: 'License Plate Lookup',
+    description: 'GCC license plate integration for instant vehicle identification. Pull up job history by plate number instantly.',
+  },
+  {
+    icon: 'users',
+    title: 'Customer Management',
+    description: 'Complete customer database with vehicle history. Find any customer by name, phone, or vehicle details.',
+  },
+  {
+    icon: 'inventory',
+    title: 'Inventory Control',
+    description: 'Track products, supplies, and stock levels. Get alerts when items are running low. Manage costs effectively.',
+  },
+  {
+    icon: 'staff',
+    title: 'Staff Management',
+    description: 'Manage your team with different roles and permissions. Track performance and job assignments per staff member.',
+  },
+  {
+    icon: 'chart',
+    title: 'Revenue Analytics',
+    description: 'See revenue by job type, time period, and staff. Identify peak times and optimize your schedule.',
+  },
+  {
+    icon: 'clock',
+    title: 'Time Tracking',
+    description: 'Track time spent on each job automatically. Analyze efficiency and improve your operations.',
+  },
+  {
+    icon: 'dollar',
+    title: 'Full Accounting',
+    description: 'Complete accounting system with FDA-compliant exports. Generate reports, track expenses, and manage finances.',
+  },
+  {
+    icon: 'zap',
+    title: 'Lightning Fast UI',
+    description: 'No more sluggish interfaces. Our modern UI responds instantly, saving your team hours every week.',
+  },
+  {
+    icon: 'users',
+    title: 'Unlimited Users',
+    description: 'Add as many staff members as you need. No per-seat pricing that grows with your team.',
+  },
+  {
+    icon: 'cog',
+    title: 'Data Migration',
+    description: 'Moving from another system? We handle the complete migration of your existing data.',
+  },
+];
+
+const workflowSteps = [
+  {
+    step: '1',
+    title: 'Vehicle Entry',
+    description: 'Quick vehicle registration with GCC license plate lookup. Customer and vehicle data auto-populated.',
+  },
+  {
+    step: '2',
+    title: 'Create Estimate',
+    description: 'Generate detailed estimates with service items and pricing. Share with customers for approval.',
+  },
+  {
+    step: '3',
+    title: 'Convert to Job',
+    description: 'One-click conversion from approved estimate to active job. Assign to staff and track progress.',
+  },
+  {
+    step: '4',
+    title: 'Generate Quote',
+    description: 'Create formal quotations with terms and conditions. Professional documents for your customers.',
+  },
+  {
+    step: '5',
+    title: 'Complete & Invoice',
+    description: 'Mark job complete, generate invoice, and process payment. Full audit trail maintained.',
+  },
+];
+
+const problemsWithOthers = [
+  'Slow, outdated PHP interfaces that waste your time',
+  'Clunky workflows with too many clicks',
+  'Per-user pricing that gets expensive fast',
+  'Missing features require expensive add-ons',
+  'Poor mobile experience for on-the-go access',
+  'Limited reporting and analytics capabilities',
+];
+---
+
+<Layout
+  title="Car Detailing Software"
+  description="Complete business management software for car detailing shops. Job tracking, estimates, invoicing, inventory, and accounting - all without per-user pricing."
+>
+  <!-- Hero Section -->
+  <Hero
+    badge="Car Detailing Solution"
+    title="Manage Your Detailing Business"
+    highlight="Like a Pro"
+    subtitle="Complete software for car detailing shops. Track jobs, manage inventory, handle invoicing - all from one lightning-fast platform with unlimited users."
+    primaryCta={{ text: 'Book a Demo', href: '/contact' }}
+    secondaryCta={{ text: 'See Features', href: '#features' }}
+    pattern="grid"
+    image={{ src: '/images/dashboard-mockup.png', alt: 'Car Detailing Software Dashboard' }}
+  />
+
+  <!-- Problem Section -->
+  <section class="py-20 lg:py-28 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-blue-400 font-medium mb-4 block">The Problem</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            Existing Software Is Holding You Back
+          </h2>
+          <p class="text-lg text-slate-400 mb-8">
+            We analyzed 4-5 car detailing software solutions on the market. What we found was disappointing: slow PHP interfaces, confusing workflows, and pricing models that punish you for growing your team.
+          </p>
+
+          <div class="space-y-4">
+            {problemsWithOthers.map((problem) => (
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="text-slate-300">{problem}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="gradient-border p-8">
+          <h3 class="text-2xl font-bold text-white mb-6">Built Different</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Modern, fast UI that responds instantly</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Streamlined workflows with fewer clicks</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Unlimited users - no per-seat charges</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">All features included, nothing extra to buy</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">GCC license plate integration built-in</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Full migration support from existing systems</span>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-700">
+            <div class="text-center">
+              <div class="text-4xl font-bold gradient-text">Unlimited</div>
+              <div class="text-slate-400 mt-1">users for your entire organization</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow Section -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-blue-400 font-medium mb-4 block">Workflow</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          From Vehicle Entry to Payment
+        </h2>
+        <p class="text-lg text-slate-400">
+          A streamlined workflow that takes you from initial customer contact to completed job and payment.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-5 gap-6">
+        {workflowSteps.map((step, index) => (
+          <div class="relative">
+            <div class="gradient-border p-6 h-full">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center mb-4">
+                <span class="text-white font-bold">{step.step}</span>
+              </div>
+              <h3 class="text-lg font-semibold text-white mb-2">{step.title}</h3>
+              <p class="text-slate-400 text-sm">{step.description}</p>
+            </div>
+            {index < workflowSteps.length - 1 && (
+              <div class="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Showcase Section -->
+  <section class="py-20 lg:py-28 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-blue-400 font-medium mb-4 block">See It In Action</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Powerful Yet Simple Interface
+        </h2>
+        <p class="text-lg text-slate-400">
+          A modern, intuitive interface that your team will actually enjoy using. No training manual required.
+        </p>
+      </div>
+
+      <ProductMockup
+        layout="double"
+        images={[
+          { src: '/images/jobs-timeline-mockup.png', alt: 'Jobs Timeline View', caption: 'Track every job through its complete lifecycle' },
+          { src: '/images/jobs-list-mockup.png', alt: 'Jobs List View', caption: 'Manage all jobs from a single dashboard' },
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-blue-400 font-medium mb-4 block">Features</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Everything Your Shop Needs
+        </h2>
+        <p class="text-lg text-slate-400">
+          A complete solution for managing every aspect of your car detailing business.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {features.map((feature) => (
+          <FeatureCard
+            icon={feature.icon}
+            title={feature.title}
+            description={feature.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- License Plate Section -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-blue-400 font-medium mb-4 block">GCC Integration</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            License Plate Lookup That Actually Works
+          </h2>
+          <p class="text-lg text-slate-400 mb-6">
+            Enter a license plate number and instantly pull up all vehicle and customer information. See complete job history, previous services, and customer preferences.
+          </p>
+          <p class="text-lg text-slate-400 mb-8">
+            No more asking customers to repeat their information. No more searching through records manually. Everything is connected and accessible in seconds.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Instant vehicle identification by plate</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Complete service history per vehicle</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Customer preferences and notes attached</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-300">Quick search by plate or customer name</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gradient-border p-8">
+          <div class="bg-slate-800 rounded-lg p-6 mb-6">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-slate-400 text-sm">License Plate</span>
+              <span class="text-emerald-400 text-sm">Found</span>
+            </div>
+            <div class="text-3xl font-mono font-bold text-white tracking-widest text-center py-4 bg-slate-900 rounded">
+              A 12345
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex justify-between items-center py-2 border-b border-slate-700">
+              <span class="text-slate-400">Vehicle</span>
+              <span class="text-white">Toyota Land Cruiser 2023</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-slate-700">
+              <span class="text-slate-400">Customer</span>
+              <span class="text-white">Ahmed Al-Rashid</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-slate-700">
+              <span class="text-slate-400">Total Jobs</span>
+              <span class="text-white">12</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <span class="text-slate-400">Last Service</span>
+              <span class="text-white">Full Detail - 2 weeks ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration Section -->
+  <section class="py-20 lg:py-28 bg-slate-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-blue-400 font-medium mb-4 block">Migration Support</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        Already Using Another System?
+      </h2>
+      <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
+        We understand that switching systems can be daunting. That's why we provide complete migration support. We'll transfer your customers, vehicles, job history, and inventory data to the new system.
+      </p>
+
+      <div class="grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
+        <div class="gradient-border p-6">
+          <div class="text-3xl font-bold gradient-text mb-2">100%</div>
+          <div class="text-slate-400 text-sm">Data Migrated</div>
+        </div>
+        <div class="gradient-border p-6">
+          <div class="text-3xl font-bold gradient-text mb-2">Zero</div>
+          <div class="text-slate-400 text-sm">Downtime</div>
+        </div>
+        <div class="gradient-border p-6">
+          <div class="text-3xl font-bold gradient-text mb-2">Full</div>
+          <div class="text-slate-400 text-sm">Training Included</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Testimonial
+        quote="The car detailing software they built is leagues ahead of anything else on the market. Our staff loves how fast and intuitive it is. We went from 10 clicks to create a job to just 3. That adds up to hours saved every week."
+        author="Ahmed K."
+        role="Owner"
+        company="Premium Auto Care"
+      />
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTA
+    title="Ready to Upgrade Your Operations?"
+    subtitle="See how Autometa's car detailing software can transform your business. Book a free demo today."
+    primaryCta={{ text: 'Book a Demo', href: '/contact' }}
+    secondaryCta={{ text: 'Contact Sales', href: '/contact' }}
+  />
+</Layout>

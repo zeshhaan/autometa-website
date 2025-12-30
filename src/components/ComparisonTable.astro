@@ -1,0 +1,60 @@
+---
+interface Column {
+  name: string;
+  highlight?: boolean;
+}
+
+interface Row {
+  feature: string;
+  values: (string | boolean)[];
+}
+
+interface Props {
+  columns: Column[];
+  rows: Row[];
+}
+
+const { columns, rows } = Astro.props;
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full">
+    <thead>
+      <tr>
+        <th class="text-left py-4 px-4 text-slate-400 font-medium">Feature</th>
+        {columns.map((col) => (
+          <th class={`text-center py-4 px-4 font-semibold ${col.highlight ? 'text-blue-400' : 'text-white'}`}>
+            {col.highlight && (
+              <span class="block text-xs text-emerald-400 font-normal mb-1">Recommended</span>
+            )}
+            {col.name}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-800">
+      {rows.map((row) => (
+        <tr class="hover:bg-slate-800/30 transition-colors">
+          <td class="py-4 px-4 text-slate-300">{row.feature}</td>
+          {row.values.map((value, idx) => (
+            <td class={`text-center py-4 px-4 ${columns[idx]?.highlight ? 'bg-blue-500/5' : ''}`}>
+              {typeof value === 'boolean' ? (
+                value ? (
+                  <svg class="w-5 h-5 text-emerald-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  <svg class="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                )
+              ) : (
+                <span class={columns[idx]?.highlight ? 'text-white font-medium' : 'text-slate-400'}>{value}</span>
+              )}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

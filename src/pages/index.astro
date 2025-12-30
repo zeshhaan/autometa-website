@@ -1,0 +1,354 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import Stats from '../components/Stats.astro';
+import Testimonial from '../components/Testimonial.astro';
+import CTA from '../components/CTA.astro';
+
+const stats = [
+  { value: '50+', label: 'Clients Served' },
+  { value: '100%', label: 'Client Satisfaction' },
+  { value: '0', label: 'Monthly Fees' },
+  { value: '24/7', label: 'Support Available' },
+];
+
+const painPoints = [
+  {
+    icon: 'dollar',
+    title: 'Recurring Costs',
+    description: 'Most SaaS platforms charge monthly fees that add up over time, eating into your profits.',
+  },
+  {
+    icon: 'clock',
+    title: 'Wasted Time',
+    description: 'Manual, repetitive tasks consume hours that could be spent growing your business.',
+  },
+  {
+    icon: 'users',
+    title: 'Per-Seat Pricing',
+    description: 'Adding team members becomes expensive when you\'re charged per user.',
+  },
+  {
+    icon: 'cog',
+    title: 'Outdated Systems',
+    description: 'Legacy software is slow, clunky, and doesn\'t integrate with modern tools.',
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'Autometa transformed our e-commerce operations. We saved thousands in monthly fees and now have a store that actually converts.',
+    author: 'Sarah M.',
+    role: 'Founder',
+    company: 'Fashion Boutique',
+  },
+  {
+    quote: 'The car detailing software they built is leagues ahead of anything else on the market. Our staff loves how fast and intuitive it is.',
+    author: 'Ahmed K.',
+    role: 'Owner',
+    company: 'Premium Auto Care',
+  },
+  {
+    quote: 'Within a month of their SEO work, we started seeing quality leads come in. Best investment we\'ve made for our business.',
+    author: 'Michael R.',
+    role: 'CEO',
+    company: 'TechServe Solutions',
+  },
+];
+---
+
+<Layout title="Home">
+  <!-- Hero Section -->
+  <Hero
+    badge="Automation that pays for itself"
+    title="Save Time, Money & Labor"
+    highlight="With Custom Software Solutions"
+    subtitle="We build tailored software and automation systems that eliminate recurring fees, streamline operations, and scale with your business."
+    primaryCta={{ text: 'Get Started', href: '/contact' }}
+    secondaryCta={{ text: 'View Solutions', href: '#solutions' }}
+  />
+
+  <!-- Stats Section -->
+  <Stats stats={stats} />
+
+  <!-- Problem Section -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Tired of These Business Headaches?
+        </h2>
+        <p class="text-lg text-slate-400">
+          Traditional software solutions drain your resources. We believe there's a better way.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {painPoints.map((point) => (
+          <FeatureCard
+            icon={point.icon}
+            title={point.title}
+            description={point.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions Section -->
+  <section id="solutions" class="py-20 lg:py-28 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-blue-400 font-medium mb-4 block">Our Solutions</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Industry-Specific Software That Works
+        </h2>
+        <p class="text-lg text-slate-400">
+          Purpose-built solutions designed for your industry, without the monthly fees or per-user charges.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <ServiceCard
+          icon="cart"
+          title="E-Commerce Platform"
+          description="Launch your online store with a one-time payment. No monthly fees, managed hosting included, AI-powered features built in."
+          href="/use-cases/e-commerce"
+          features={[
+            'Zero monthly fees - pay once, own forever',
+            'AI image generation & alt text',
+            'WhatsApp, Gemini, Stripe integrations',
+            'Advanced back-office with analytics',
+            'Lightning-fast performance with SEO',
+          ]}
+        />
+
+        <ServiceCard
+          icon="car"
+          title="Car Detailing Software"
+          description="Complete business management for car detailing shops. Track jobs, manage inventory, handle invoicing - all without per-seat pricing."
+          href="/use-cases/car-detailing"
+          features={[
+            'Unlimited users, no per-seat charges',
+            'Job → Estimate → Quote → Invoice flow',
+            'GCC license plate integration',
+            'Inventory & stock management',
+            'Revenue analytics & reporting',
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-blue-400 font-medium mb-4 block">Our Services</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Beyond Software: Full Digital Solutions
+        </h2>
+        <p class="text-lg text-slate-400">
+          From web development to SEO, we help businesses establish and grow their digital presence.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <FeatureCard
+          icon="code"
+          title="Website Development"
+          description="New builds, redesigns, and fixes. We create fast, modern websites that convert visitors into customers."
+        />
+        <FeatureCard
+          icon="search"
+          title="SEO & E-commerce SEO"
+          description="Proven strategies that drive organic traffic. Our clients start seeing quality leads within a month."
+        />
+        <FeatureCard
+          icon="document"
+          title="CMS Integration"
+          description="Content management systems that make it easy for your team to update your website without technical knowledge."
+        />
+        <FeatureCard
+          icon="chat"
+          title="AI Chatbot Integration"
+          description="Intelligent chat agents that handle customer inquiries 24/7, freeing up your team for important work."
+        />
+        <FeatureCard
+          icon="sparkles"
+          title="Custom Automation"
+          description="Eliminate repetitive tasks with custom automation solutions tailored to your specific workflows."
+        />
+        <FeatureCard
+          icon="globe"
+          title="Digital Strategy"
+          description="End-to-end consulting to help you leverage technology for business growth and efficiency."
+        />
+      </div>
+
+      <div class="text-center mt-12">
+        <a
+          href="/services"
+          class="inline-flex items-center gap-2 px-6 py-3 border border-slate-600 text-white font-medium rounded-lg hover:bg-white/5 transition-colors"
+        >
+          View All Services
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="py-20 lg:py-28 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <span class="text-blue-400 font-medium mb-4 block">Why Autometa</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            Built Different. Priced Fairly.
+          </h2>
+          <p class="text-lg text-slate-400 mb-8">
+            We're not another SaaS company looking to lock you into subscriptions. We build solutions you own, optimized for your specific needs.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-1">One-Time Pricing</h3>
+                <p class="text-slate-400">Pay once and own your software forever. No hidden fees, no surprises.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-1">Unlimited Users</h3>
+                <p class="text-slate-400">Add as many team members as you need without per-seat charges.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-1">Custom Built</h3>
+                <p class="text-slate-400">Tailored to your specific business needs, not a one-size-fits-all template.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-1">Migration Support</h3>
+                <p class="text-slate-400">Moving from an existing system? We handle the migration for you.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="gradient-border p-8 lg:p-12">
+            <div class="text-center mb-8">
+              <div class="text-5xl font-bold gradient-text mb-2">$0</div>
+              <div class="text-slate-400">per month, forever</div>
+            </div>
+
+            <div class="space-y-4 mb-8">
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-slate-300">Full ownership of your software</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-slate-300">Managed hosting included</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-slate-300">Unlimited team members</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-slate-300">AI-powered features</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-slate-300">Ongoing support</span>
+              </div>
+            </div>
+
+            <a
+              href="/contact"
+              class="block w-full text-center px-6 py-4 bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
+            >
+              Get a Custom Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-blue-400 font-medium mb-4 block">Testimonials</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Trusted by Businesses Like Yours
+        </h2>
+        <p class="text-lg text-slate-400">
+          See what our clients have to say about working with Autometa.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {testimonials.map((testimonial) => (
+          <Testimonial
+            quote={testimonial.quote}
+            author={testimonial.author}
+            role={testimonial.role}
+            company={testimonial.company}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTA
+    title="Ready to Transform Your Business?"
+    subtitle="Let's discuss how Autometa can help you save time, cut costs, and scale efficiently."
+    primaryCta={{ text: 'Book a Free Consultation', href: '/contact' }}
+    secondaryCta={{ text: 'Learn More', href: '/services' }}
+  />
+</Layout>

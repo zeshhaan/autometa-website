@@ -1,0 +1,63 @@
+---
+interface Props {
+  url?: string;
+}
+
+// Replace with your actual Calendly URL
+const { url = 'https://calendly.com/autometa/consultation' } = Astro.props;
+---
+
+<div class="calendly-container">
+  <div class="gradient-border p-6 lg:p-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-white">Book a Consultation</h3>
+        <p class="text-slate-400 text-sm">Schedule a free 30-minute call</p>
+      </div>
+    </div>
+
+    <p class="text-slate-400 mb-6">
+      Prefer to talk things through? Book a free consultation call with our team. We'll discuss your project, answer your questions, and provide tailored recommendations.
+    </p>
+
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center gap-2 w-full px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      Schedule a Call
+    </a>
+
+    <div class="mt-6 pt-6 border-t border-slate-700">
+      <div class="flex items-center gap-4 text-sm text-slate-400">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          30 min
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          Video call
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          Free
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
