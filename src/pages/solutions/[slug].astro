@@ -189,7 +189,7 @@ const waHref = `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}?text=${enc
       {otherProducts.map((p, i) => (
         <a
           href={`/solutions/${p.slug}`}
-          class="reveal group flex flex-col gap-2 rounded-xl border border-border bg-card p-6 transition-[transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-border-strong card-highlight"
+          class="reveal group flex flex-col gap-2 rounded-xl border border-border bg-card p-6 transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-border-strong active:scale-[0.99] card-highlight"
           style={`--reveal-delay: ${i * 70}ms`}
         >
           <span class="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-card-muted" style={`color: oklch(0.72 0.15 ${p.accentHue})`}>
