@@ -1,0 +1,15 @@
+{
+  // Cloudflare Workers — static assets deploy for the Astro build output.
+  // Deploy with: npm run deploy   (runs `astro build` then `wrangler deploy`)
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "autometa",
+  "compatibility_date": "2026-01-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

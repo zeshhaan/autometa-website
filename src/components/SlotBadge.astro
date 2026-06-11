@@ -1,0 +1,61 @@
+---
+// Hero pill badge with a slot-machine text roll (slot-text / textmotion.dev).
+// Cycles through phrases; no icon. First phrase is rendered server-side so it
+// shows without JS, then the library takes over the element.
+interface Props {
+  phrases?: string[];
+  interval?: number;
+  class?: string;
+}
+
+const {
+  phrases = [
+    'Business automation, done right',
+    'Save time, money & labour',
+    'Software you own outright',
+    'No subscriptions, no lock-in',
+    'POS · Billing · Ecommerce',
+  ],
+  interval = 2800,
+  class: className = '',
+} = Astro.props;
+---
+
+<span
+  class={`inline-flex w-fit items-center rounded-full border border-border bg-badge/5 px-3.5 py-1 text-xs font-medium text-foreground/85 backdrop-blur-sm dark:bg-badge ${className}`}
+  data-slot-badge
+  data-phrases={JSON.stringify(phrases)}
+  data-interval={interval}
+>
+  <span class="slot-badge-text">{phrases[0]}</span>
+</span>
+
+<script>
+  import { slotText } from 'slot-text';
+  import 'slot-text/style.css';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-slot-badge]').forEach((badge) => {
+    const textEl = badge.querySelector<HTMLElement>('.slot-badge-text');
+    if (!textEl) return;
+
+    let phrases: string[] = [];
+    try {
+      phrases = JSON.parse(badge.dataset.phrases || '[]');
+    } catch {
+      phrases = [];
+    }
+    if (phrases.length === 0) return;
+
+    const label = slotText(textEl, phrases[0]);
+    if (reduce || phrases.length === 1) return;
+
+    const interval = Number(badge.dataset.interval) || 2800;
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % phrases.length;
+      label.set(phrases[i], { direction: 'up' });
+    }, interval);
+  });
+</script>

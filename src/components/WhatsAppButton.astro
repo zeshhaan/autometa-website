@@ -1,0 +1,20 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+const waNumber = site.whatsapp.replace(/[^0-9]/g, '');
+const waHref = `https://wa.me/${waNumber}?text=${encodeURIComponent("Hi Autometa — I'd like to know more about your software.")}`;
+---
+
+<a
+  href={waHref}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full border border-border bg-card/90 py-2.5 pl-2.5 pr-3 text-sm font-medium shadow-lg backdrop-blur-md transition-transform hover:-translate-y-0.5 card-highlight"
+  aria-label="Chat with Autometa on WhatsApp"
+>
+  <span class="inline-flex size-7 items-center justify-center rounded-full bg-[#25D366] text-white">
+    <Icon name="whatsapp" size={17} />
+  </span>
+  <span class="hidden sm:inline">Chat with us</span>
+</a>

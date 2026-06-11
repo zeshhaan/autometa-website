@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Background from '../components/Background.astro';
+---
+
+<Layout title="Page not found">
+  <section class="relative flex min-h-[80svh] items-center justify-center overflow-hidden">
+    <Background />
+    <div class="relative z-10 mx-auto max-w-md container-px text-center">
+      <p class="font-mono text-sm uppercase tracking-[0.2em] text-accent">404</p>
+      <h1 class="mt-4 text-balance text-3xl font-medium tracking-tight text-foreground md:text-4xl">
+        This page took the day off
+      </h1>
+      <p class="mt-4 text-base leading-relaxed text-muted-foreground">
+        The link may be broken or the page moved. Let's get you back to something useful.
+      </p>
+      <div class="mt-8 flex justify-center">
+        <Button href="/" size="lg" icon="arrow-left">Back home</Button>
+      </div>
+    </div>
+  </section>
+</Layout>

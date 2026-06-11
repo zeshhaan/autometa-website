@@ -1,0 +1,207 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/Section.astro';
+import Background from '../../components/Background.astro';
+import ShinyBadge from '../../components/ShinyBadge.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
+import { products, site } from '../../data/site';
+
+export async function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const otherProducts = products.filter((p) => p.slug !== product.slug);
+const waHref = `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi Autometa — I'm interested in ${product.name}.`)}`;
+---
+
+<Layout title={product.name} description={product.summary}>
+  <!-- ░░ HERO ░░ -->
+  <section class="relative overflow-hidden pb-16 pt-32 md:pb-20 md:pt-40">
+    <Background />
+    <div class="relative z-10 mx-auto max-w-4xl container-px text-center">
+      <a
+        href="/#solutions"
+        class="reveal inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <Icon name="arrow-left" size={15} /> All solutions
+      </a>
+
+      <div class="reveal mt-6 flex justify-center" style="--reveal-delay: 60ms">
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/70 px-3 py-1 text-xs text-muted-foreground backdrop-blur-sm"
+        >
+          {product.liveUrl && <span class="size-1.5 rounded-full bg-success"></span>}
+          {product.badge}
+        </span>
+      </div>
+
+      <p class="reveal mt-6 font-mono text-xs uppercase tracking-[0.18em] text-accent" style="--reveal-delay: 100ms">
+        {product.category}
+      </p>
+      <h1 class="reveal mt-3 text-balance text-4xl font-medium tracking-tight text-foreground md:text-6xl" style="--reveal-delay: 140ms">
+        {product.name}
+      </h1>
+      <p class="reveal mx-auto mt-4 max-w-2xl text-pretty text-lg font-medium text-foreground/90 md:text-xl" style="--reveal-delay: 180ms">
+        {product.tagline}
+      </p>
+      <p class="reveal mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground" style="--reveal-delay: 220ms">
+        {product.description}
+      </p>
+
+      <div class="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="--reveal-delay: 280ms">
+        <Button href={waHref} external size="lg" iconRight="arrow-right">Start a project</Button>
+        {product.liveUrl && (
+          <Button href={product.liveUrl} external size="lg" variant="secondary" iconRight="arrow-up-right">
+            View it live
+          </Button>
+        )}
+      </div>
+
+      <div class="reveal mx-auto mt-10 flex max-w-2xl flex-col gap-3 sm:flex-row" style="--reveal-delay: 340ms">
+        <div class="flex flex-1 items-start gap-3 rounded-lg border border-border bg-card/60 p-4 text-left backdrop-blur-sm card-highlight">
+          <Icon name="users" size={18} class="mt-0.5 shrink-0 text-accent" />
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Built for</p>
+            <p class="mt-1 text-sm text-foreground/85">{product.audience}</p>
+          </div>
+        </div>
+        <div class="flex flex-1 items-start gap-3 rounded-lg border border-border bg-card/60 p-4 text-left backdrop-blur-sm card-highlight">
+          <Icon name="receipt" size={18} class="mt-0.5 shrink-0 text-accent" />
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Pricing</p>
+            <p class="mt-1 text-sm text-foreground/85">{product.pricing}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ STAT BAND ░░ -->
+  {product.stats && (
+    <div class="border-y border-border bg-card-muted/30">
+      <div class="mx-auto grid max-w-6xl grid-cols-2 container-px md:grid-cols-4">
+        {product.stats.map((s, i) => (
+          <div
+            class={`reveal flex flex-col gap-1 py-8 md:border-r border-border ${i === 3 ? 'md:border-r-0' : ''} ${i % 2 === 0 ? 'border-r' : ''} ${i < 2 ? 'border-b md:border-b-0' : ''} pl-1 md:pl-6`}
+            style={`--reveal-delay: ${i * 60}ms`}
+          >
+            <span class="text-3xl font-medium tracking-tight text-foreground md:text-4xl">{s.value}</span>
+            <span class="text-sm text-muted-foreground">{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- ░░ PROBLEM ░░ -->
+  <Section
+    eyebrow="The problem"
+    title="What this fixes"
+    align="left"
+    innerClass="max-w-5xl"
+  >
+    <div class="mt-12 grid gap-4 md:grid-cols-3">
+      {product.painPoints.map((p, i) => (
+        <div class="reveal flex flex-col gap-3 rounded-xl border border-border bg-card p-6 card-highlight" style={`--reveal-delay: ${i * 70}ms`}>
+          <span class="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-card-muted text-warning">
+            <Icon name="x" size={18} />
+          </span>
+          <h3 class="text-base font-medium text-foreground">{p.title}</h3>
+          <p class="text-sm leading-relaxed text-muted-foreground">{p.description}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- ░░ WORKFLOW ░░ -->
+  {product.workflow && (
+    <Section
+      eyebrow="The workflow"
+      title="How it flows"
+      description="The software follows the natural shape of the work — no detours."
+      class="bg-card-muted/20 border-y border-border"
+      innerClass="max-w-5xl"
+    >
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        {product.workflow.map((w, i) => (
+          <div class="reveal relative flex flex-col gap-3" style={`--reveal-delay: ${i * 90}ms`}>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex size-10 items-center justify-center rounded-full border border-accent/40 bg-accent-soft font-mono text-sm font-medium text-accent">
+                {w.step}
+              </span>
+              {i < product.workflow.length - 1 && (
+                <span class="hidden h-px flex-1 bg-gradient-to-r from-border to-transparent md:block"></span>
+              )}
+            </div>
+            <h3 class="text-lg font-medium tracking-tight text-foreground">{w.title}</h3>
+            <p class="text-sm leading-relaxed text-muted-foreground">{w.description}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  )}
+
+  <!-- ░░ FEATURES ░░ -->
+  <Section
+    eyebrow="Everything you need"
+    title={`Inside ${product.name}`}
+    description="Built for the way the business actually works — not adapted from something generic."
+  >
+    <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {product.features.map((f, i) => (
+        <FeatureCard icon={f.icon} title={f.title} description={f.description} index={i} accentHue={product.accentHue} />
+      ))}
+    </div>
+
+    <div class="reveal mt-8 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-border bg-card-muted/40 px-5 py-4 text-sm text-muted-foreground">
+      <Icon name="layers" size={16} class="text-accent" />
+      <span class="font-medium text-foreground/80">Stack:</span>
+      <span class="font-mono text-xs">{product.techStack}</span>
+    </div>
+  </Section>
+
+  <!-- ░░ CTA ░░ -->
+  <section class="relative overflow-hidden border-t border-border py-24 md:py-28">
+    <div class="pointer-events-none absolute inset-0 grid-backdrop opacity-60"></div>
+    <div class="relative mx-auto max-w-3xl container-px text-center">
+      <h2 class="reveal text-balance text-3xl font-medium tracking-tight text-foreground md:text-4xl">
+        Want {product.name} for your business?
+      </h2>
+      <p class="reveal mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground" style="--reveal-delay: 80ms">
+        We'll tailor it to your operation, migrate your data, and train your team.
+      </p>
+      <div class="reveal mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" style="--reveal-delay: 140ms">
+        <Button href={waHref} external size="lg" icon="whatsapp">Message us on WhatsApp</Button>
+        <Button href={`mailto:${site.email}`} size="lg" variant="secondary" icon="mail">{site.email}</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ OTHER SOLUTIONS ░░ -->
+  <Section eyebrow="More from Autometa" title="Other solutions" class="border-t border-border">
+    <div class="mt-12 grid gap-4 sm:grid-cols-3">
+      {otherProducts.map((p, i) => (
+        <a
+          href={`/solutions/${p.slug}`}
+          class="reveal group flex flex-col gap-2 rounded-xl border border-border bg-card p-6 transition-[transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-border-strong card-highlight"
+          style={`--reveal-delay: ${i * 70}ms`}
+        >
+          <span class="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-card-muted" style={`color: oklch(0.72 0.15 ${p.accentHue})`}>
+            <Icon name={p.icon} size={18} />
+          </span>
+          <h3 class="mt-1 text-base font-medium text-foreground">{p.name}</h3>
+          <p class="text-sm leading-relaxed text-muted-foreground">{p.summary}</p>
+          <span class="mt-1 inline-flex items-center gap-1 text-sm font-medium text-foreground transition-colors group-hover:text-accent">
+            Explore <Icon name="arrow-right" size={15} class="transition-transform group-hover:translate-x-0.5" />
+          </span>
+        </a>
+      ))}
+    </div>
+  </Section>
+</Layout>

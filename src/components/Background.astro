@@ -1,0 +1,61 @@
+---
+// Hero backdrop — a CSS approximation of nocta's animated grid+noise shader:
+// a faint masked grid, two slowly drifting aurora glows, and a soft top vignette.
+interface Props { class?: string }
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
+  <!-- faint grid, masked to fade out toward the edges -->
+  <div class="bg-grid absolute inset-0"></div>
+
+  <!-- drifting aurora glows -->
+  <div class="aurora aurora-1"></div>
+  <div class="aurora aurora-2"></div>
+
+  <!-- bottom fade into the page background -->
+  <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background"></div>
+</div>
+
+<style>
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 35%, #000 10%, transparent 70%);
+    mask-image: radial-gradient(ellipse 75% 60% at 50% 35%, #000 10%, transparent 70%);
+  }
+
+  .aurora {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.5;
+    will-change: transform, opacity;
+  }
+
+  .aurora-1 {
+    top: -10%;
+    left: 50%;
+    width: 46rem;
+    height: 30rem;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, var(--accent), transparent 65%);
+    animation: aurora-drift 16s var(--ease-smooth) infinite;
+  }
+
+  .aurora-2 {
+    top: 10%;
+    right: -8%;
+    width: 30rem;
+    height: 26rem;
+    background: radial-gradient(circle, color-mix(in oklab, var(--accent) 70%, var(--foreground)), transparent 68%);
+    opacity: 0.28;
+    animation: aurora-drift 22s var(--ease-smooth) infinite reverse;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aurora { animation: none; }
+  }
+</style>

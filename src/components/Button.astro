@@ -1,0 +1,65 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  href?: string;
+  variant?: 'default' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  icon?: string;
+  iconRight?: string;
+  class?: string;
+  type?: 'button' | 'submit';
+  external?: boolean;
+  [key: string]: any;
+}
+
+const {
+  href,
+  variant = 'default',
+  size = 'md',
+  icon,
+  iconRight,
+  class: className = '',
+  type = 'button',
+  external = false,
+  ...rest
+} = Astro.props;
+
+const base =
+  'group relative inline-flex cursor-pointer items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap transition-[background-color,color,box-shadow,filter,transform] duration-150 ease-[var(--ease-out-quad)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50';
+
+const variants = {
+  default:
+    'bg-linear-to-b from-gradient-from to-gradient-to text-primary hover:contrast-[0.92] hover:-translate-y-px shadow-[inset_0_1px_0_0_rgb(255_255_255/.18),0_1px_1px_-0.5px_rgba(9,9,11,0.1),0_3px_3px_-1.5px_rgba(9,9,11,0.08),0_6px_6px_-3px_rgba(9,9,11,0.06)]',
+  secondary:
+    'border border-border bg-card text-foreground hover:bg-card-muted shadow-sm card-highlight',
+  ghost: 'text-foreground/80 hover:text-foreground hover:bg-card-muted',
+};
+
+const sizes = {
+  sm: 'h-8 px-3 text-sm',
+  md: 'h-10 px-5 text-sm',
+  lg: 'h-12 px-6 text-base',
+};
+
+const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+const iconSize = size === 'lg' ? 18 : 16;
+const Tag = href ? 'a' : 'button';
+const extra = href
+  ? external
+    ? { href, target: '_blank', rel: 'noopener noreferrer' }
+    : { href }
+  : { type };
+---
+
+<Tag class={classes} {...extra} {...rest}>
+  {icon && <Icon name={icon} size={iconSize} />}
+  <span><slot /></span>
+  {iconRight && (
+    <Icon
+      name={iconRight}
+      size={iconSize}
+      class="transition-transform duration-200 group-hover:translate-x-0.5"
+    />
+  )}
+</Tag>
