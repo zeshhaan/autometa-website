@@ -8,10 +8,10 @@ import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
 import SolutionCard from '../components/SolutionCard.astro';
 import FeatureCard from '../components/FeatureCard.astro';
+import Integrations from '../components/Integrations.astro';
+import TechStack from '../components/TechStack.astro';
 import Faq from '../components/Faq.astro';
 import { products, services, differentiators, stats, site } from '../data/site';
-
-const liveProducts = products.filter((p) => p.liveUrl);
 
 const processSteps = [
   { step: '01', title: 'Discovery', description: 'We map how your business actually runs — the workflows, the edge cases, the spreadsheets holding it together — and scope a clear plan.' },
@@ -42,33 +42,13 @@ const processSteps = [
         style="--reveal-delay: 160ms"
       >
         Autometa builds custom POS, billing, ecommerce and operations platforms — fast,
-        AI-powered, and yours to own. No per-seat fees, no lock-in, no software that can
-        switch off your business.
+        AI-powered, and built around your business. No per-seat fees, no lock-in, no
+        software that can switch off your business.
       </p>
 
       <div class="reveal mt-9 flex flex-col items-center gap-3 sm:flex-row" style="--reveal-delay: 240ms">
         <Button href="#contact" size="lg" iconRight="arrow-right">Start a project</Button>
         <Button href="#solutions" size="lg" variant="secondary">Explore our work</Button>
-      </div>
-
-      <div class="reveal mt-12 flex flex-col items-center gap-3" style="--reveal-delay: 320ms">
-        <span class="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          Live in production
-        </span>
-        <div class="flex flex-wrap items-center justify-center gap-2">
-          {liveProducts.map((p) => (
-            <a
-              href={p.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-3 py-1.5 font-mono text-xs text-foreground/80 backdrop-blur-sm transition-colors hover:text-foreground"
-            >
-              <span class="size-1.5 rounded-full bg-success"></span>
-              {p.liveLabel}
-              <Icon name="arrow-up-right" size={12} />
-            </a>
-          ))}
-        </div>
       </div>
     </div>
   </section>
@@ -107,7 +87,7 @@ const processSteps = [
     id="solutions"
     eyebrow="Our work"
     title="Products we've shipped — and you can use today"
-    description="Real platforms running real businesses across retail, automotive, ecommerce and print. Each one is owned by the client, not rented from us."
+    description="Real platforms running real businesses across retail, automotive, ecommerce and print — each one tailored to the trade, not adapted from a template."
   >
     <div class="mt-14 grid gap-5 md:grid-cols-2">
       {products.map((p, i) => (
@@ -115,6 +95,12 @@ const processSteps = [
       ))}
     </div>
   </Section>
+
+  <!-- ░░ INTEGRATIONS ░░ -->
+  <Integrations />
+
+  <!-- ░░ TECH STACK ░░ -->
+  <TechStack />
 
   <!-- ░░ WHY US ░░ -->
   <Section
@@ -133,21 +119,21 @@ const processSteps = [
     <div class="reveal mt-5 overflow-hidden rounded-xl border border-border bg-card card-highlight">
       <div class="grid items-center gap-8 p-8 md:grid-cols-[1fr_auto] md:p-10">
         <div class="flex flex-col gap-3">
-          <h3 class="text-2xl font-medium tracking-tight text-foreground">Pay once. Own it forever.</h3>
+          <h3 class="text-2xl font-medium tracking-tight text-foreground">Pricing that fits the product.</h3>
           <p class="max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Most of what we build is a one-time investment — the code, the data and the
-            infrastructure are yours. Add your whole team at no extra cost, and only pay for
-            managed hosting if you'd like us to run it.
+            Some of our software is a one-time investment you own outright; some is a simple
+            monthly subscription. Whichever the model, there are no per-seat fees, no lock-in,
+            and your data is always yours.
           </p>
           <div class="mt-1 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/80">
             <span class="inline-flex items-center gap-2"><Icon name="check" size={16} class="text-success" /> No per-seat fees</span>
+            <span class="inline-flex items-center gap-2"><Icon name="check" size={16} class="text-success" /> One-time or subscription</span>
             <span class="inline-flex items-center gap-2"><Icon name="check" size={16} class="text-success" /> No vendor lock-in</span>
-            <span class="inline-flex items-center gap-2"><Icon name="check" size={16} class="text-success" /> Full source &amp; data</span>
           </div>
         </div>
         <div class="flex items-end gap-1 md:flex-col md:items-end">
           <span class="text-6xl font-medium tracking-tight text-foreground">$0</span>
-          <span class="mb-2 text-sm text-muted-foreground md:mb-0">/ seat, forever</span>
+          <span class="mb-2 text-sm text-muted-foreground md:mb-0">/ seat, always</span>
         </div>
       </div>
     </div>

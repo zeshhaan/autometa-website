@@ -11,8 +11,8 @@ export const site = {
 export const navLinks = [
   { label: 'Services', href: '/#services' },
   { label: 'Solutions', href: '/#solutions' },
+  { label: 'Integrations', href: '/#integrations' },
   { label: 'Why us', href: '/#why' },
-  { label: 'Work', href: '/#work' },
   { label: 'FAQ', href: '/#faq' },
 ];
 
@@ -22,10 +22,10 @@ export interface Stat {
 }
 
 export const stats: Stat[] = [
-  { value: '4', label: 'Products live in production' },
-  { value: '500+', label: 'Commits shipped' },
-  { value: '0', label: 'Per-seat fees, ever' },
-  { value: '100%', label: 'Code & data you own' },
+  { value: '100%', label: 'Uptime, around the clock' },
+  { value: '20+', label: 'Business domains served' },
+  { value: '24/7', label: 'Support that answers' },
+  { value: '0', label: 'Data lost in migration' },
 ];
 
 export interface Service {
@@ -81,9 +81,9 @@ export interface Differentiator {
 
 export const differentiators: Differentiator[] = [
   {
-    name: 'You own it outright',
+    name: 'No lock-in, ever',
     description:
-      'The code, the data, the infrastructure — all yours. No vendor lock-in and no platform that can switch off your business.',
+      'Your data is yours and portable, on infrastructure you can see. One-time or subscription, you are never trapped on a platform that can switch off your business.',
     icon: 'key',
   },
   {
@@ -101,7 +101,7 @@ export const differentiators: Differentiator[] = [
   {
     name: 'Migration handled',
     description:
-      'Moving off PrestaShop, spreadsheets or a legacy desktop system? We migrate your data and train your team.',
+      'Moving off PrestaShop, spreadsheets or a legacy desktop system? We bring every record across — customers, stock, history — and train your team. Nothing left behind.',
     icon: 'arrows',
   },
   {
@@ -144,13 +144,17 @@ export interface Product {
   workflow?: { step: string; title: string; description: string }[];
   stats?: Stat[];
   techStack: string;
+  cta?: {
+    primary: { label: string; message?: string };
+    secondary?: { label: string; message?: string };
+  };
 }
 
 export const products: Product[] = [
   {
     slug: 'pos',
-    name: 'MoulaviPOS',
-    category: 'Point of Sale & Retail Management',
+    name: 'Stationery POS',
+    category: 'Retail & point of sale',
     badge: 'Live in production',
     tagline: 'Run the whole shop, not just the till.',
     summary:
@@ -207,14 +211,14 @@ export const products: Product[] = [
   },
   {
     slug: 'car-detailing',
-    name: 'Autometa Billing',
-    category: 'Detailing Studio Management',
+    name: 'Car Detailing Shop Software',
+    category: 'Automotive & detailing',
     badge: 'Built for UAE studios',
     tagline: 'Your detailing studio, fully computerized.',
     summary:
       'From estimate to invoice in three taps — inventory, margins and a professional customer experience, built for detailing rather than repurposed from garage software.',
     description:
-      'Generic garage suites are heavy with lift bays and parts catalogs you never touch, and miss the things a detailing studio actually needs. Autometa Billing follows the natural flow of a detailing job and nothing else.',
+      'Manage inquiries, estimates, jobs, invoices, payments, customer sources, and follow-ups in one easy system — without using bulky garage software made for mechanical workshops.',
     icon: 'car',
     accentHue: 50,
     audience: 'Car detailing, PPF, ceramic coating and tint studios across the UAE.',
@@ -264,11 +268,15 @@ export const products: Product[] = [
       { value: '∞', label: 'Staff, no per-seat fees' },
     ],
     techStack: 'Phoenix LiveView · PostgreSQL · WhatsApp Business API · VAT-compliant PDF & Excel export',
+    cta: {
+      primary: { label: 'Book Free Demo', message: "Hi Autometa — I'd like to book a free demo of the car detailing shop software." },
+      secondary: { label: 'Start 2 Months Free', message: "Hi Autometa — I'd like to start the 2-month free trial of the car detailing shop software." },
+    },
   },
   {
     slug: 'ecommerce',
-    name: 'idesignsouq',
-    category: 'Ecommerce Platform',
+    name: 'Custom Ecommerce',
+    category: 'Online retail',
     badge: 'Live in production',
     tagline: 'A Shopify you actually own.',
     summary:
@@ -325,8 +333,8 @@ export const products: Product[] = [
   },
   {
     slug: 'billing-operations',
-    name: 'Hira',
-    category: 'Billing & Operations for Print Presses',
+    name: 'Printing Press Management',
+    category: 'Print & operations',
     badge: 'Audit-ready by design',
     tagline: 'Every quote becomes a paid, compliant invoice.',
     summary:
@@ -393,19 +401,19 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    question: 'Do I own the software, or am I renting it?',
+    question: 'Is your software one-time or subscription?',
     answer:
-      'You own it. For our custom builds you get the code, the data and the infrastructure outright — no vendor lock-in, and no platform that can switch your business off. Some products (like the detailing studio app) also offer a low monthly option if you prefer that.',
+      'It depends on the product. Some are a one-time investment you own outright — code, data and infrastructure. Others run as a simple monthly subscription. Neither model charges per seat, and your data is always yours to take with you.',
   },
   {
     question: 'Will there be monthly fees or per-seat charges?',
     answer:
-      'No per-seat charges, ever — add your whole team for free. Custom builds are a one-time investment; we only charge for managed hosting where you want us to run the servers, and even that is modest.',
+      'Never per-seat — add your whole team for free. Depending on the product it is either a one-time investment or a flat subscription. The only ongoing cost is managed hosting, where you want us to run the servers for you.',
   },
   {
     question: 'Can you migrate my data from my current system?',
     answer:
-      'Yes. We have migrated clients off PrestaShop, spreadsheets and legacy desktop POS systems. Data migration and staff training are part of onboarding, not an afterthought.',
+      'Yes. We have moved clients off PrestaShop, spreadsheets and legacy desktop POS systems — customers, stock, invoices and history all retained. Migration and staff training are part of onboarding, not an afterthought.',
   },
   {
     question: 'How long does a project take?',

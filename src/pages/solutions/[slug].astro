@@ -17,7 +17,14 @@ export async function getStaticPaths() {
 
 const { product } = Astro.props;
 const otherProducts = products.filter((p) => p.slug !== product.slug);
-const waHref = `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi Autometa — I'm interested in ${product.name}.`)}`;
+
+const waBase = `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}`;
+const waLink = (message: string) => `${waBase}?text=${encodeURIComponent(message)}`;
+const defaultMessage = `Hi Autometa — I'm interested in ${product.name}.`;
+const waHref = waLink(defaultMessage);
+
+const primaryCta = product.cta?.primary ?? { label: 'Start a project', message: defaultMessage };
+const secondaryCta = product.cta?.secondary;
 ---
 
 <Layout title={product.name} description={product.summary}>
@@ -55,10 +62,12 @@ const waHref = `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}?text=${enc
       </p>
 
       <div class="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="--reveal-delay: 280ms">
-        <Button href={waHref} external size="lg" iconRight="arrow-right">Start a project</Button>
-        {product.liveUrl && (
-          <Button href={product.liveUrl} external size="lg" variant="secondary" iconRight="arrow-up-right">
-            View it live
+        <Button href={waLink(primaryCta.message ?? defaultMessage)} external size="lg" iconRight="arrow-right">
+          {primaryCta.label}
+        </Button>
+        {secondaryCta && (
+          <Button href={waLink(secondaryCta.message ?? defaultMessage)} external size="lg" variant="secondary" iconRight="arrow-right">
+            {secondaryCta.label}
           </Button>
         )}
       </div>
