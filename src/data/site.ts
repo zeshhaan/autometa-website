@@ -81,39 +81,39 @@ export interface Differentiator {
 
 export const differentiators: Differentiator[] = [
   {
-    name: 'No lock-in, ever',
+    name: 'We understand the workflow before writing code',
     description:
-      'Your data is yours and portable, on infrastructure you can see. One-time or subscription, you are never trapped on a platform that can switch off your business.',
-    icon: 'key',
+      "We don't start with screens. We first understand how your business runs today — who does what, where mistakes happen, what is repeated, and what the owner needs to see.",
+    icon: 'search',
   },
   {
-    name: 'No per-seat pricing',
+    name: 'We build around your business, not a fixed template',
     description:
-      'Add your whole team without watching the bill climb. Roles and permissions included, unlimited staff.',
-    icon: 'users',
-  },
-  {
-    name: 'Built for real operations',
-    description:
-      'Not templateware. Multi-outlet stock, double-entry accounting, VAT/GST compliance — the messy details handled properly.',
+      'Your business should not adjust itself to generic software. The software should adjust to your business.',
     icon: 'layers',
   },
   {
-    name: 'Migration handled',
+    name: 'We replace scattered work with one connected system',
     description:
-      'Moving off PrestaShop, spreadsheets or a legacy desktop system? We bring every record across — customers, stock, history — and train your team. Nothing left behind.',
+      'WhatsApp, Excel, paper, invoices, stock, staff tasks, and reports can be connected into one workflow.',
+    icon: 'plug',
+  },
+  {
+    name: 'We focus on owner visibility',
+    description:
+      'Owners should know what is pending, what is delayed, what is unpaid, who is responsible, and what needs attention.',
+    icon: 'chart',
+  },
+  {
+    name: 'We can start from your existing process',
+    description:
+      'Already using Excel, paper, another software, or WhatsApp? We can study your current flow and help migrate important data where possible.',
     icon: 'arrows',
   },
   {
-    name: 'AI where it earns its keep',
+    name: 'We stay after launch',
     description:
-      'Product photoshoots, invoice extraction from a photo, and smart support — practical AI, not a gimmick bolt-on.',
-    icon: 'sparkles',
-  },
-  {
-    name: 'Managed & supported',
-    description:
-      'We run the servers, security and updates, and stay on call — so the software keeps working while you run the business.',
+      "We don't treat software as one-shot delivery. We improve it based on real usage, staff feedback, and business changes.",
     icon: 'shield',
   },
 ];
@@ -401,33 +401,53 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    question: 'Is your software one-time or subscription?',
+    question: 'Do you build ready-made software or custom software?',
     answer:
-      'It depends on the product. Some are a one-time investment you own outright — code, data and infrastructure. Others run as a simple monthly subscription. Neither model charges per seat, and your data is always yours to take with you.',
+      'We build custom business software around your workflow. Some modules may be reusable, but the final system is shaped around how your business operates.',
   },
   {
-    question: 'Will there be monthly fees or per-seat charges?',
+    question: 'Can you improve our existing Excel/WhatsApp process?',
     answer:
-      'Never per-seat — add your whole team for free. Depending on the product it is either a one-time investment or a flat subscription. The only ongoing cost is managed hosting, where you want us to run the servers for you.',
+      'Yes. Many projects start by studying existing Excel sheets, WhatsApp flows, printed forms, invoices, and manual processes.',
   },
   {
-    question: 'Can you migrate my data from my current system?',
+    question: 'Can you import our old data?',
     answer:
-      'Yes. We have moved clients off PrestaShop, spreadsheets and legacy desktop POS systems — customers, stock, invoices and history all retained. Migration and staff training are part of onboarding, not an afterthought.',
+      'Where export or clean records are available, we can help import customers, products, invoices, stock, job records, or other important data.',
+  },
+  {
+    question: 'Do you work with small businesses?',
+    answer:
+      'Yes. Autometa is especially useful for small and medium businesses that are growing beyond manual work.',
+  },
+  {
+    question: 'Can staff have different access levels?',
+    answer:
+      'Yes. We can create roles such as owner, manager, staff, accountant, technician, sales, or admin.',
+  },
+  {
+    question: 'Can the software work on mobile?',
+    answer:
+      'Yes. Depending on the project, we can build responsive web apps or installable PWAs that work on desktop and mobile.',
+  },
+  {
+    question: 'Can you integrate WhatsApp?',
+    answer:
+      'Yes. We can integrate WhatsApp for invoices, job updates, reminders, campaigns, and customer communication depending on the business requirement.',
+  },
+  {
+    question: 'Can you integrate payments, Zoho, Stripe, Tamara, or other tools?',
+    answer:
+      'Yes. We can connect external tools when APIs or supported integration methods are available.',
   },
   {
     question: 'How long does a project take?',
     answer:
-      'Most builds reach a usable first version in a few weeks and go live shortly after, then improve continuously. We scope a clear timeline up front and ship in increments so you see progress early.',
+      'It depends on scope. A focused internal system can start with an MVP, then improve in phases after real usage.',
   },
   {
-    question: 'Is the software compliant with local tax rules?',
+    question: 'How do we start?',
     answer:
-      'Compliance is built in, not bolted on. Our UAE products handle TRN, VAT and FTA retention; the retail POS produces GST-compliant invoices and GSTR-1 exports for India.',
-  },
-  {
-    question: 'What happens after launch?',
-    answer:
-      'We run hosting, security and updates, and stay on call for support. You also get the roadmap — new features ship regularly across every product we maintain.',
+      'We start with a workflow audit. You show us how your business currently runs, and we identify what can be computerized, automated, or simplified.',
   },
 ];
