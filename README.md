@@ -1,4 +1,4 @@
-# Autometa — portfolio website
+# Autometa portfolio website
 
 Marketing/portfolio site for Autometa, built with **Astro** + **Tailwind CSS v4**,
 deployed as static assets on **Cloudflare Workers**. Design language is adapted from
@@ -52,7 +52,7 @@ public/og.png           ← social share image
 Almost everything lives in `src/data/site.ts`. Add or edit a product in the
 `products` array and a detail page is generated automatically at `/solutions/<slug>`.
 
-## Before going live — replace these placeholders
+## Before going live: replace these placeholders
 
 - `site.whatsapp` and `site.email` in `src/data/site.ts`
 - `site` URL in `astro.config.mjs` (used for canonical/OG URLs) if not `autometa.ae`

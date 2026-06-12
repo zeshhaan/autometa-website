@@ -20,7 +20,7 @@ const otherProducts = products.filter((p) => p.slug !== product.slug);
 
 const waBase = `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}`;
 const waLink = (message: string) => `${waBase}?text=${encodeURIComponent(message)}`;
-const defaultMessage = `Hi Autometa — I'm interested in ${product.name}.`;
+const defaultMessage = `Hi Autometa, I'm interested in ${product.name}.`;
 const waHref = waLink(defaultMessage);
 
 const primaryCta = product.cta?.primary ?? { label: 'Start a project', message: defaultMessage };
@@ -133,7 +133,7 @@ const secondaryCta = product.cta?.secondary;
     <Section
       eyebrow="The workflow"
       title="How it flows"
-      description="The software follows the natural shape of the work — no detours."
+      description="The software follows the natural shape of the work. No detours."
       class="bg-card-muted/20 border-y border-border"
       innerClass="max-w-5xl"
     >
@@ -160,7 +160,7 @@ const secondaryCta = product.cta?.secondary;
   <Section
     eyebrow="Everything you need"
     title={`Inside ${product.name}`}
-    description="Built for the way the business actually works — not adapted from something generic."
+    description="Built for the way the business actually works, not adapted from something generic."
   >
     <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {product.features.map((f, i) => (

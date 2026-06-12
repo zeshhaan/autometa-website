@@ -4,7 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ----------------------------------------------------------------------------
-   Fonts — ported from the nocta reference (Instrument Sans + Monaspace Neon)
+   Fonts: ported from the nocta reference (Instrument Sans + Monaspace Neon)
 ---------------------------------------------------------------------------- */
 @font-face {
   font-family: "Instrument Sans";
@@ -171,7 +171,7 @@
    Utilities & keyframes
 ---------------------------------------------------------------------------- */
 
-/* Inset top highlight on cards — the signature nocta "lit edge" */
+/* Inset top highlight on cards: the signature nocta "lit edge" */
 @utility card-highlight {
   position: relative;
   isolation: isolate;
@@ -213,7 +213,7 @@
   mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 30%, transparent 75%);
 }
 
-/* Scroll-reveal: progressive enhancement — only hidden when JS is active, so
+/* Scroll-reveal: progressive enhancement, only hidden when JS is active, so
    content is fully visible without JS (SEO / no-JS / resilience). */
 .js .reveal {
   opacity: 0;

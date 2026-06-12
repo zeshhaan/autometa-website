@@ -14,10 +14,10 @@ import Faq from '../components/Faq.astro';
 import { products, services, differentiators, stats, site } from '../data/site';
 
 const processSteps = [
-  { step: '01', title: 'Discovery', description: 'We map how your business actually runs — the workflows, the edge cases, the spreadsheets holding it together — and scope a clear plan.' },
+  { step: '01', title: 'Discovery', description: 'We map how your business actually runs (the workflows, the edge cases, the spreadsheets holding it together) and scope a clear plan.' },
   { step: '02', title: 'Design & build', description: 'You see a working version in weeks, not months. We ship in increments so you can react early and steer the direction.' },
   { step: '03', title: 'Launch & migrate', description: 'We move your data off the old system, train your team, and go live with hosting, security and backups handled.' },
-  { step: '04', title: 'Run & improve', description: 'We keep the lights on and the roadmap moving — new features ship regularly across everything we maintain.' },
+  { step: '04', title: 'Run & improve', description: 'We keep the lights on and the roadmap moving. New features ship regularly across everything we maintain.' },
 ];
 ---
 
@@ -38,12 +38,13 @@ const processSteps = [
       </h1>
 
       <p
-        class="reveal mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg"
+        class="reveal mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg"
         style="--reveal-delay: 160ms"
       >
-        Autometa builds custom POS, billing, ecommerce and operations platforms — fast,
-        AI-powered, and built around your business. No per-seat fees, no lock-in, no
-        software that can switch off your business.
+        Autometa builds custom web-based business systems for shops, studios, factories,
+        service businesses, and ecommerce brands. From estimates and job cards to stock,
+        invoices, payments, WhatsApp updates, dashboards, and reports, we build around the
+        way your business actually works.
       </p>
 
       <div class="reveal mt-9 flex flex-col items-center gap-3 sm:flex-row" style="--reveal-delay: 240ms">
@@ -73,7 +74,7 @@ const processSteps = [
     id="services"
     eyebrow="What we do"
     title="From a single automation to a platform you run the business on"
-    description="We design, build, and run custom software end-to-end — then stay on to support it. One team for the whole stack."
+    description="We design, build, and run custom software end-to-end, then stay on to support it. One team for the whole stack."
   >
     <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {services.map((s, i) => (
@@ -86,8 +87,8 @@ const processSteps = [
   <Section
     id="solutions"
     eyebrow="Our work"
-    title="Products we've shipped — and you can use today"
-    description="Real platforms running real businesses across retail, automotive, ecommerce and print — each one tailored to the trade, not adapted from a template."
+    title="Products we've shipped and you can use today"
+    description="Real platforms running real businesses across retail, automotive, ecommerce and print. Each one tailored to the trade, not adapted from a template."
   >
     <div class="mt-14 grid gap-5 md:grid-cols-2">
       {products.map((p, i) => (
@@ -107,7 +108,7 @@ const processSteps = [
     id="why"
     eyebrow="Why Autometa"
     title="Because your business is too specific for generic software."
-    description="Off-the-shelf tools force your business to bend around them. We do the opposite — software shaped around how you already work."
+    description="Off-the-shelf tools force your business to bend around them. We do the opposite: software shaped around how you already work."
   >
     <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {differentiators.map((d, i) => (
@@ -177,7 +178,7 @@ const processSteps = [
       </h2>
       <p class="reveal mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg" style="--reveal-delay: 140ms">
         Tell us what's slowing your business down. We'll show you what owning the right
-        software looks like — and how fast we can get you there.
+        software looks like, and how fast we can get you there.
       </p>
       <div class="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="--reveal-delay: 200ms">
         <Button
