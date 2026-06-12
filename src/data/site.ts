@@ -153,14 +153,14 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: 'pos',
-    name: 'Stationery POS',
+    name: 'Stationery POS & Stock System',
     category: 'Retail & point of sale',
     badge: 'Live in production',
     tagline: 'Run the whole shop, not just the till.',
     summary:
-      'A browser-based POS that handles billing, inventory, multi-outlet stock, customers and full double-entry accounting in one place.',
+      'A fast web-based POS and inventory system with keyboard billing, pricing tiers, GST invoices, AI-assisted stock entry, accounting, reports, and WhatsApp communication.',
     description:
-      'MoulaviPOS replaces the dusty desktop register with a fast, install-free retail platform. Bill at the counter, watch stock update in real time, keep GST clean, and get a real set of books out the other side, across every outlet.',
+      'A fast web-based POS and inventory system with keyboard billing, pricing tiers, GST invoices, AI-assisted stock entry, accounting, reports, and WhatsApp communication.',
     icon: 'store',
     accentHue: 265,
     liveUrl: 'https://pos.autometa.ae',
@@ -178,7 +178,7 @@ export const products: Product[] = [
       {
         title: 'Software tied to one machine',
         description:
-          'Old desktop POS is chained to a single PC. MoulaviPOS runs in any browser, on counter, tablet or phone, with nothing to install.',
+          'Old desktop POS is chained to a single PC. Stationery POS runs in any browser, on counter, tablet or phone, with nothing to install.',
       },
       {
         title: 'Stock that lies',
@@ -216,9 +216,9 @@ export const products: Product[] = [
     badge: 'Built for UAE studios',
     tagline: 'Your detailing studio, fully computerized.',
     summary:
-      'From estimate to invoice in three taps. Inventory, margins and a professional customer experience, built for detailing rather than repurposed from garage software.',
+      'A lightweight system for inquiries, estimates, job conversion, scheduling, invoices, payments, referral tracking, dashboards, Zoho integration, and WhatsApp job updates.',
     description:
-      'Manage inquiries, estimates, jobs, invoices, payments, customer sources, and follow-ups in one easy system, without using bulky garage software made for mechanical workshops.',
+      'A lightweight system for inquiries, estimates, job conversion, scheduling, invoices, payments, referral tracking, dashboards, Zoho integration, and WhatsApp job updates.',
     icon: 'car',
     accentHue: 50,
     audience: 'Car detailing, PPF, ceramic coating and tint studios across the UAE.',
@@ -333,24 +333,25 @@ export const products: Product[] = [
   },
   {
     slug: 'billing-operations',
-    name: 'Printing Press Management',
+    name: 'Printing Press Workflow System',
     category: 'Print & operations',
     badge: 'Audit-ready by design',
     tagline: 'Every quote becomes a paid, compliant invoice.',
     summary:
       'Runs a printing press end-to-end, from quote and job card to delivery note, VAT invoice and payment, without a single number falling through the cracks.',
     description:
-      'Hira connects the entire document lifecycle of a print shop into one timeline. Drafts stay editable; issuing locks a record as an immutable, FTA-compliant legal document with gap-free numbering and a full audit trail.',
+      'The system connects the entire document lifecycle of a print shop into one timeline. Drafts stay editable; issuing locks a record as an immutable, FTA-compliant legal document with gap-free numbering and a full audit trail.',
     icon: 'printer',
     accentHue: 150,
     audience:
       'Printing presses and print shops in the UAE that must issue FTA-compliant tax invoices in AED.',
     pricing: 'Project pricing on request, scoped to your operation.',
     highlights: [
-      'Estimate → Job Card → Delivery → Invoice → Payment',
-      'Issued documents are tamper-proof and snapshotted',
-      'Gap-free sequential numbering for audit',
-      'UAE VAT & TRN built in',
+      'Estimate → job card → delivery note → invoice → payment',
+      'Final amount tracking',
+      'Customer account history',
+      'Receivables',
+      'VAT export',
     ],
     painPoints: [
       {
