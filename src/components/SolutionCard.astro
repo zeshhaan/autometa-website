@@ -27,7 +27,6 @@ const { product, index = 0 } = Astro.props;
       <Icon name={product.icon} size={22} />
     </span>
     <span class="inline-flex items-center gap-1.5 rounded-full border border-border bg-card-muted px-2.5 py-1 text-xs text-muted-foreground">
-      {product.liveUrl && <span class="size-1.5 rounded-full bg-success"></span>}
       {product.badge}
     </span>
   </div>
@@ -56,16 +55,5 @@ const { product, index = 0 } = Astro.props;
       Explore {product.name}
       <Icon name="arrow-right" size={16} class="transition-transform duration-200 group-hover:translate-x-0.5" />
     </a>
-    {product.liveUrl && (
-      <a
-        href={product.liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
-      >
-        {product.liveLabel}
-        <Icon name="arrow-up-right" size={13} />
-      </a>
-    )}
   </div>
 </article>

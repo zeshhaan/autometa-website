@@ -20,10 +20,10 @@ const otherProducts = products.filter((p) => p.slug !== product.slug);
 
 const waBase = `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}`;
 const waLink = (message: string) => `${waBase}?text=${encodeURIComponent(message)}`;
-const defaultMessage = `Hi Autometa, I'm interested in ${product.name}.`;
+const defaultMessage = `Hi Autometa, I'd like to schedule a workflow call about ${product.name}.`;
 const waHref = waLink(defaultMessage);
 
-const primaryCta = product.cta?.primary ?? { label: 'Start a project', message: defaultMessage };
+const primaryCta = product.cta?.primary ?? { label: 'Schedule a workflow call', message: defaultMessage };
 const secondaryCta = product.cta?.secondary;
 ---
 
@@ -43,7 +43,6 @@ const secondaryCta = product.cta?.secondary;
         <span
           class="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/70 px-3 py-1 text-xs text-muted-foreground backdrop-blur-sm"
         >
-          {product.liveUrl && <span class="size-1.5 rounded-full bg-success"></span>}
           {product.badge}
         </span>
       </div>
@@ -81,32 +80,15 @@ const secondaryCta = product.cta?.secondary;
           </div>
         </div>
         <div class="flex flex-1 items-start gap-3 rounded-lg border border-border bg-card/60 p-4 text-left backdrop-blur-sm card-highlight">
-          <Icon name="receipt" size={18} class="mt-0.5 shrink-0 text-accent" />
+          <Icon name="layers" size={18} class="mt-0.5 shrink-0 text-accent" />
           <div>
-            <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Pricing</p>
-            <p class="mt-1 text-sm text-foreground/85">{product.pricing}</p>
+            <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Best fit</p>
+            <p class="mt-1 text-sm text-foreground/85">{product.engagement}</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ░░ STAT BAND ░░ -->
-  {product.stats && (
-    <div class="border-y border-border bg-card-muted/30">
-      <div class="mx-auto grid max-w-6xl grid-cols-2 container-px md:grid-cols-4">
-        {product.stats.map((s, i) => (
-          <div
-            class={`reveal flex flex-col gap-1 py-8 md:border-r border-border ${i === 3 ? 'md:border-r-0' : ''} ${i % 2 === 0 ? 'border-r' : ''} ${i < 2 ? 'border-b md:border-b-0' : ''} pl-1 md:pl-6`}
-            style={`--reveal-delay: ${i * 60}ms`}
-          >
-            <span class="text-3xl font-medium tracking-tight text-foreground md:text-4xl">{s.value}</span>
-            <span class="text-sm text-muted-foreground">{s.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )}
 
   <!-- ░░ PROBLEM ░░ -->
   <Section
@@ -167,12 +149,6 @@ const secondaryCta = product.cta?.secondary;
         <FeatureCard icon={f.icon} title={f.title} description={f.description} index={i} accentHue={product.accentHue} />
       ))}
     </div>
-
-    <div class="reveal mt-8 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-border bg-card-muted/40 px-5 py-4 text-sm text-muted-foreground">
-      <Icon name="layers" size={16} class="text-accent" />
-      <span class="font-medium text-foreground/80">Stack:</span>
-      <span class="font-mono text-xs">{product.techStack}</span>
-    </div>
   </Section>
 
   <!-- ░░ CTA ░░ -->
@@ -180,13 +156,13 @@ const secondaryCta = product.cta?.secondary;
     <div class="pointer-events-none absolute inset-0 grid-backdrop opacity-60"></div>
     <div class="relative mx-auto max-w-3xl container-px text-center">
       <h2 class="reveal text-balance text-3xl font-medium tracking-tight text-foreground md:text-4xl">
-        Want {product.name} for your business?
+        Want this depth for your business?
       </h2>
       <p class="reveal mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground" style="--reveal-delay: 80ms">
-        We'll tailor it to your operation, migrate your data, and train your team.
+        Share your current process with us. We'll identify the right starting scope, the systems it should connect to, and the rollout path that fits your team.
       </p>
       <div class="reveal mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" style="--reveal-delay: 140ms">
-        <Button href={waHref} external size="lg" icon="whatsapp">Message us on WhatsApp</Button>
+        <Button href={waHref} external size="lg" icon="whatsapp">Schedule on WhatsApp</Button>
         <Button href={`mailto:${site.email}`} size="lg" variant="secondary" icon="mail">{site.email}</Button>
       </div>
     </div>

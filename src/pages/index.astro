@@ -5,19 +5,17 @@ import Background from '../components/Background.astro';
 import ShinyBadge from '../components/ShinyBadge.astro';
 import SlotBadge from '../components/SlotBadge.astro';
 import Button from '../components/Button.astro';
-import Icon from '../components/Icon.astro';
 import SolutionCard from '../components/SolutionCard.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import Integrations from '../components/Integrations.astro';
-import TechStack from '../components/TechStack.astro';
 import Faq from '../components/Faq.astro';
-import { products, services, differentiators, stats, site } from '../data/site';
+import { products, services, differentiators, site } from '../data/site';
 
 const processSteps = [
   { step: '01', title: 'Discovery', description: 'We map how your business actually runs (the workflows, the edge cases, the spreadsheets holding it together) and scope a clear plan.' },
   { step: '02', title: 'Design & build', description: 'You see a working version in weeks, not months. We ship in increments so you can react early and steer the direction.' },
   { step: '03', title: 'Launch & migrate', description: 'We move your data off the old system, train your team, and go live with hosting, security and backups handled.' },
-  { step: '04', title: 'Run & improve', description: 'We keep the lights on and the roadmap moving. New features ship regularly across everything we maintain.' },
+  { step: '04', title: 'Run & improve', description: 'We monitor the live system, fix issues, and improve the workflow based on real staff and owner feedback.' },
 ];
 ---
 
@@ -34,47 +32,32 @@ const processSteps = [
         class="reveal mt-6 text-balance text-4xl font-medium leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl"
         style="--reveal-delay: 80ms"
       >
-        Software that saves you<br class="hidden sm:block" /> time, money &amp; labour.
+        Software for the way<br class="hidden sm:block" /> your business actually runs.
       </h1>
 
       <p
         class="reveal mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg"
         style="--reveal-delay: 160ms"
       >
-        Autometa builds custom web-based business systems for shops, studios, factories,
-        service businesses, and ecommerce brands. From estimates and job cards to stock,
-        invoices, payments, WhatsApp updates, dashboards, and reports, we build around the
-        way your business actually works.
+        Autometa builds custom web-based systems for shops, studios, ecommerce brands,
+        print operations and service teams. We have built vertical tools for POS,
+        automotive detailing, ecommerce and print workflows, and we can map the next
+        one around how your business really operates.
       </p>
 
       <div class="reveal mt-9 flex flex-col items-center gap-3 sm:flex-row" style="--reveal-delay: 240ms">
-        <Button href="#contact" size="lg" iconRight="arrow-right">Start a project</Button>
+        <Button href="#contact" size="lg" iconRight="arrow-right">Schedule a workflow call</Button>
         <Button href="#solutions" size="lg" variant="secondary">Explore our work</Button>
       </div>
     </div>
   </section>
-
-  <!-- ░░ STAT BAND ░░ -->
-  <div class="border-y border-border bg-card-muted/30">
-    <div class="mx-auto grid max-w-6xl grid-cols-2 container-px md:grid-cols-4">
-      {stats.map((s, i) => (
-        <div
-          class={`reveal flex flex-col gap-1 py-8 ${i % 2 === 0 ? 'border-r' : ''} border-border md:border-r ${i === 3 ? 'md:border-r-0' : ''} ${i < 2 ? 'border-b md:border-b-0' : ''} pl-1 md:pl-6`}
-          style={`--reveal-delay: ${i * 60}ms`}
-        >
-          <span class="text-3xl font-medium tracking-tight text-foreground md:text-4xl">{s.value}</span>
-          <span class="text-sm text-muted-foreground">{s.label}</span>
-        </div>
-      ))}
-    </div>
-  </div>
 
   <!-- ░░ SERVICES ░░ -->
   <Section
     id="services"
     eyebrow="What we do"
     title="From a single automation to a platform you run the business on"
-    description="We design, build, and run custom software end-to-end, then stay on to support it. One team for the whole stack."
+    description="We design, build, and run custom software end-to-end, then stay on to support it. One team for the whole workflow."
   >
     <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {services.map((s, i) => (
@@ -87,8 +70,8 @@ const processSteps = [
   <Section
     id="solutions"
     eyebrow="Our work"
-    title="Products we've shipped and you can use today"
-    description="Real platforms running real businesses across retail, automotive, ecommerce and print. Each one tailored to the trade, not adapted from a template."
+    title="Vertical systems we know how to build"
+    description="These are not generic templates. They are examples of workflow depth we can bring to different trades, then adapt to the next business that needs something specific."
   >
     <div class="mt-14 grid gap-5 md:grid-cols-2">
       {products.map((p, i) => (
@@ -99,9 +82,6 @@ const processSteps = [
 
   <!-- ░░ INTEGRATIONS ░░ -->
   <Integrations />
-
-  <!-- ░░ TECH STACK ░░ -->
-  <TechStack />
 
   <!-- ░░ WHY US ░░ -->
   <Section
@@ -114,29 +94,6 @@ const processSteps = [
       {differentiators.map((d, i) => (
         <FeatureCard icon={d.icon} title={d.name} description={d.description} index={i} />
       ))}
-    </div>
-
-    <!-- pricing philosophy callout -->
-    <div class="reveal mt-5 overflow-hidden rounded-xl border border-border bg-card card-highlight">
-      <div class="grid items-center gap-8 p-8 md:grid-cols-[1fr_auto] md:p-10">
-        <div class="flex flex-col gap-3">
-          <h3 class="text-2xl font-medium tracking-tight text-foreground">Pricing that fits the product.</h3>
-          <p class="max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Some of our software is a one-time investment you own outright; some is a simple
-            monthly subscription. Whichever the model, there are no per-seat fees, no lock-in,
-            and your data is always yours.
-          </p>
-          <div class="mt-1 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/80">
-            <span class="inline-flex items-center gap-2"><Icon name="check" size={16} class="text-success" /> No per-seat fees</span>
-            <span class="inline-flex items-center gap-2"><Icon name="check" size={16} class="text-success" /> One-time or subscription</span>
-            <span class="inline-flex items-center gap-2"><Icon name="check" size={16} class="text-success" /> No vendor lock-in</span>
-          </div>
-        </div>
-        <div class="flex items-end gap-1 md:flex-col md:items-end">
-          <span class="text-6xl font-medium tracking-tight text-foreground">$0</span>
-          <span class="mb-2 text-sm text-muted-foreground md:mb-0">/ seat, always</span>
-        </div>
-      </div>
     </div>
   </Section>
 
@@ -174,11 +131,12 @@ const processSteps = [
     <div class="relative mx-auto max-w-3xl container-px text-center">
       <div class="reveal"><ShinyBadge icon="rocket">Let's build</ShinyBadge></div>
       <h2 class="reveal mt-6 text-balance text-3xl font-medium tracking-tight text-foreground md:text-5xl" style="--reveal-delay: 80ms">
-        Ready to save time, money &amp; labour?
+        Ready to map your workflow?
       </h2>
       <p class="reveal mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg" style="--reveal-delay: 140ms">
-        Tell us what's slowing your business down. We'll show you what owning the right
-        software looks like, and how fast we can get you there.
+        Book a focused conversation. Show us how work enters, moves, gets billed,
+        and gets reported today; we'll tell you what a custom system should handle
+        first and what can wait.
       </p>
       <div class="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="--reveal-delay: 200ms">
         <Button
@@ -187,14 +145,14 @@ const processSteps = [
           size="lg"
           icon="whatsapp"
         >
-          Message us on WhatsApp
+          Schedule on WhatsApp
         </Button>
         <Button href={`mailto:${site.email}`} size="lg" variant="secondary" icon="mail">
           {site.email}
         </Button>
       </div>
       <p class="reveal mt-6 text-sm text-muted-foreground" style="--reveal-delay: 260ms">
-        Already on another system? We migrate your data for free.
+        Already using another system? We can plan a controlled migration around the data you can export.
       </p>
     </div>
   </section>

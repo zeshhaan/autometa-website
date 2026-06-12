@@ -3,9 +3,9 @@ export const site = {
   domain: 'autometa.ae',
   email: 'hello@autometa.ae',
   whatsapp: '+971500000000',
-  tagline: 'Software that pays for itself.',
+  tagline: 'Custom operations software for serious workflows.',
   description:
-    'Autometa builds custom software and automation that helps businesses save time, money, and labour: point-of-sale, billing, ecommerce, and bespoke operations platforms you own outright.',
+    'Autometa builds custom web-based operations software for retail, automotive, ecommerce, print and service businesses that need billing, stock, payments, documents, reporting and customer communication in one connected workflow.',
 };
 
 export const navLinks = [
@@ -14,18 +14,6 @@ export const navLinks = [
   { label: 'Integrations', href: '/#integrations' },
   { label: 'Why us', href: '/#why' },
   { label: 'FAQ', href: '/#faq' },
-];
-
-export interface Stat {
-  value: string;
-  label: string;
-}
-
-export const stats: Stat[] = [
-  { value: '100%', label: 'Uptime, around the clock' },
-  { value: '20+', label: 'Business domains served' },
-  { value: '24/7', label: 'Support that answers' },
-  { value: '0', label: 'Data lost in migration' },
 ];
 
 export interface Service {
@@ -44,7 +32,7 @@ export const services: Service[] = [
   {
     name: 'Ecommerce Builds',
     description:
-      'Own-it-forever online stores with AI product imagery, real-time admin, and Stripe. No monthly SaaS or transaction fees.',
+      'Custom online stores with real-time admin, product personalization, AI-assisted product imagery, inventory and payment integrations.',
     icon: 'cart',
   },
   {
@@ -56,7 +44,7 @@ export const services: Service[] = [
   {
     name: 'SEO & Growth',
     description:
-      'Technical SEO and ecommerce-specific strategy that brings in qualified leads. Clients typically see traction within a month.',
+      'Technical SEO, analytics and content structure for businesses that need their website to generate qualified enquiries.',
     icon: 'search',
   },
   {
@@ -68,7 +56,7 @@ export const services: Service[] = [
   {
     name: 'CMS & Integrations',
     description:
-      'Headless CMS, payment gateways, WhatsApp Business API, and any third-party system wired cleanly into your stack.',
+      'Content management, payments, WhatsApp workflows, and third-party tools wired cleanly into your business process.',
     icon: 'plug',
   },
 ];
@@ -134,16 +122,12 @@ export interface Product {
   description: string;
   icon: string;
   accentHue: number;
-  liveUrl?: string;
-  liveLabel?: string;
   audience: string;
-  pricing: string;
+  engagement: string;
   highlights: string[];
   painPoints: { title: string; description: string }[];
   features: ProductFeature[];
   workflow?: { step: string; title: string; description: string }[];
-  stats?: Stat[];
-  techStack: string;
   cta?: {
     primary: { label: string; message?: string };
     secondary?: { label: string; message?: string };
@@ -153,26 +137,24 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: 'pos',
-    name: 'Stationery POS & Stock System',
+    name: 'Retail POS & Stock System',
     category: 'Retail & point of sale',
-    badge: 'Live in production',
-    tagline: 'Run the whole shop, not just the till.',
+    badge: 'Retail operations system',
+    tagline: 'Billing, stock, GST and accounts in one flow.',
     summary:
-      'A fast web-based POS and inventory system with keyboard billing, pricing tiers, GST invoices, AI-assisted stock entry, accounting, reports, and WhatsApp communication.',
+      'A browser-based POS for retail teams with barcode billing, held bills, outlet stock, purchase receiving, GST reporting, accounting, WhatsApp receipts and reliable PDFs.',
     description:
-      'A fast web-based POS and inventory system with keyboard billing, pricing tiers, GST invoices, AI-assisted stock entry, accounting, reports, and WhatsApp communication.',
+      'A retail operating system that connects the counter, stock room and books: barcode billing, held bills, outlet inventory, purchase receiving, returns, GST reports, accounting vouchers, WhatsApp receipts and server-rendered PDFs.',
     icon: 'store',
     accentHue: 265,
-    liveUrl: 'https://pos.autometa.ae',
-    liveLabel: 'pos.autometa.ae',
     audience:
       'Indian retail and multi-outlet shops: GST-registered businesses that need real inventory, accounting and compliance, not just a cash drawer.',
-    pricing: 'One-time project pricing from ₹75,000 · 3 months support & staff training included.',
+    engagement: 'Best fit for GST-registered retail teams that need billing, outlet stock, purchasing and accounting in one browser-based system.',
     highlights: [
-      'Keyboard-first billing with barcode scan & held bills',
-      'Real-time stock across every outlet',
-      'Built-in double-entry accounting & GST returns',
-      'Installs like an app, syncs every terminal live',
+      'Counter billing with barcode search and held bills',
+      'Purchase receiving updates stock and GST records atomically',
+      'GST exports, returns, credit notes and rounded invoice PDFs',
+      'WhatsApp receipts, owner summaries and cross-device stock sync',
     ],
     painPoints: [
       {
@@ -192,42 +174,39 @@ export const products: Product[] = [
       },
     ],
     features: [
-      { title: 'Fast Billing', description: 'Keyboard-first checkout, barcode scanning, held bills, and MRP / retail / B2B / wholesale price tiers.', icon: 'receipt' },
-      { title: 'Inventory & Purchasing', description: 'Real-time stock, weighted-average landing cost, purchase invoices, and AI extraction from an invoice photo.', icon: 'box' },
+      { title: 'Fast Billing', description: 'Keyboard-first checkout, barcode scanning, held bills, and MRP / retail / B2B / wholesale rate tiers.', icon: 'receipt' },
+      { title: 'Inventory & Purchasing', description: 'Outlet stock, transfer workflows, purchase invoices, stock movements, and atomic purchase receiving.', icon: 'box' },
       { title: 'Multi-Outlet', description: 'Independent products, vendors and stock per outlet, with a transfer request → approve → receive workflow.', icon: 'layers' },
       { title: 'Built-in Accounting', description: 'Chart of accounts, double-entry vouchers, trial balance, P&L and balance sheet generated from daily operations.', icon: 'calculator' },
       { title: 'Reports & GST', description: '12-tab reporting across sales, debtors, creditors, ledgers and GST, with Excel / PDF / CSV export.', icon: 'chart' },
       { title: 'Customers & Wallet', description: 'Retail / B2B / wholesale profiles, purchase history, a store-credit wallet, and sales returns.', icon: 'users' },
-      { title: 'WhatsApp Integration', description: 'Auto-send invoice PDFs and a daily owner summary through the WhatsApp Business API.', icon: 'chat' },
-      { title: 'PWA & Realtime', description: 'Installs like a native app, works mobile-first, and syncs every terminal instantly across devices.', icon: 'bolt' },
+      { title: 'WhatsApp Integration', description: 'Invoice PDFs, daily owner summaries, template validation, message logs and delivery diagnostics.', icon: 'chat' },
+      { title: 'Mobile & Realtime', description: 'Works cleanly on counter, tablet and phone, with every terminal staying in sync across devices.', icon: 'bolt' },
     ],
-    stats: [
-      { value: '29+', label: 'Features shipped' },
-      { value: '150+', label: 'GST categories pre-loaded' },
-      { value: '500+', label: 'Commits across two repos' },
-      { value: 'Live', label: 'In production' },
-    ],
-    techStack: 'React 19 + TanStack · Elixir/Ash + PostgreSQL · PWA with realtime cross-device sync',
+    cta: {
+      primary: { label: 'Map a retail workflow', message: "Hi Autometa, I'd like to discuss a retail POS and stock workflow." },
+      secondary: { label: 'Discuss my operation', message: "Hi Autometa, I'd like to see how a custom operations system could fit my business." },
+    },
   },
   {
     slug: 'car-detailing',
-    name: 'Car Detailing Shop Software',
+    name: 'Automotive Detailing Workflow System',
     category: 'Automotive & detailing',
-    badge: 'Built for UAE studios',
-    tagline: 'Your detailing studio, fully computerized.',
+    badge: 'Automotive operations system',
+    tagline: 'From enquiry to paid job, without losing the thread.',
     summary:
-      'A lightweight system for inquiries, estimates, job conversion, scheduling, invoices, payments, referral tracking, dashboards, Zoho integration, and WhatsApp job updates.',
+      'A UAE-focused workflow for detailing studios: lead source, customer and vehicle records, estimates, quotations, jobs, invoices, payments, dashboards, Zoho and WhatsApp.',
     description:
-      'A lightweight system for inquiries, estimates, job conversion, scheduling, invoices, payments, referral tracking, dashboards, Zoho integration, and WhatsApp job updates.',
+      'A detailing studio system that keeps the whole job journey visible: enquiries, referral sources, customers, UAE vehicle plates, estimates, quotations, jobs, invoices, payments, VAT documents, dashboard metrics and WhatsApp updates.',
     icon: 'car',
     accentHue: 50,
     audience: 'Car detailing, PPF, ceramic coating and tint studios across the UAE.',
-    pricing: 'AED 10 / day (300 AED/month) · 2 months free · no per-user fees · cancel anytime.',
+    engagement: 'Best fit for UAE detailing studios that want enquiries, estimates, job status, VAT invoices and customer updates in one operating system.',
     highlights: [
-      'Estimate → Quotation → Invoice in three taps',
+      'Inquiry → estimate → quotation → job → invoice lifecycle',
       'UAE plate format, TRN and VAT-compliant PDFs',
-      'Service-based inventory that deducts automatically',
-      'Profit margin per service, live on the dashboard',
+      'Referral source, customer and vehicle history',
+      'WhatsApp templates, test sends and delivery readiness checks',
     ],
     painPoints: [
       {
@@ -238,7 +217,7 @@ export const products: Product[] = [
       {
         title: 'No idea of your real margin',
         description:
-          'Charge AED 5,000 for a PPF job, but what did the material cost? Every service tracks material cost against revenue.',
+          'High-value jobs need visibility into material use, payment status and the source of each enquiry.',
       },
       {
         title: 'Not made for the UAE',
@@ -255,57 +234,48 @@ export const products: Product[] = [
       { title: '3-Tier Document Flow', description: 'Estimate → Quotation → Invoice with revision history, PDF export and VAT compliance.', icon: 'receipt' },
       { title: 'Dashboard & Analytics', description: 'Live revenue, job status, service profitability, staff performance and conversion rates.', icon: 'chart' },
       { title: 'UAE Vehicle Plates', description: 'Full NUMBER-CODE-EMIRATE support, search by plate, multiple vehicles per customer.', icon: 'car' },
-      { title: 'Inventory & Stock', description: 'Services consume materials automatically: PPF rolls, ceramic bottles, consumables, with low-stock alerts.', icon: 'box' },
-      { title: 'Profit Margin Tracking', description: 'Exact material cost versus revenue per service, so you know what actually makes money.', icon: 'calculator' },
+      { title: 'Inventory & Stock', description: 'Service line items can connect to materials, consumables and stock workflows.', icon: 'box' },
+      { title: 'Accounting & VAT', description: 'Invoices, payments, VAT returns and accounting exports are built around UAE operating needs.', icon: 'calculator' },
       { title: 'Job Scheduling', description: 'Queue, assign staff and track timelines with start / complete capture for every job type.', icon: 'calendar' },
       { title: 'Customer Management', description: 'Full service history per customer and vehicle, VIP flags and lead-source tracking.', icon: 'users' },
       { title: 'WhatsApp Notifications', description: 'Booking confirmations, job updates, completion alerts and offers, all over WhatsApp.', icon: 'chat' },
     ],
-    stats: [
-      { value: '3 taps', label: 'Inquiry to paid invoice' },
-      { value: 'AED 10', label: 'Per day, all in' },
-      { value: '2 mo', label: 'Free to start' },
-      { value: '∞', label: 'Staff, no per-seat fees' },
-    ],
-    techStack: 'Phoenix LiveView · PostgreSQL · WhatsApp Business API · VAT-compliant PDF & Excel export',
     cta: {
-      primary: { label: 'Book Free Demo', message: "Hi Autometa, I'd like to book a free demo of the car detailing shop software." },
-      secondary: { label: 'Start 2 Months Free', message: "Hi Autometa, I'd like to start the 2-month free trial of the car detailing shop software." },
+      primary: { label: 'Request a walkthrough', message: "Hi Autometa, I'd like a walkthrough of the car detailing shop software." },
+      secondary: { label: 'Discuss my workflow', message: "Hi Autometa, I'd like to discuss whether the car detailing workflow fits my studio." },
     },
   },
   {
     slug: 'ecommerce',
-    name: 'Custom Ecommerce',
+    name: 'Custom Ecommerce Operations',
     category: 'Online retail',
-    badge: 'Live in production',
-    tagline: 'A Shopify you actually own.',
+    badge: 'Commerce operations system',
+    tagline: 'A custom storefront with a serious back office.',
     summary:
-      'A fast online store plus a real-time admin panel, with AI product photoshoots built in, and zero monthly or transaction fees.',
+      'A custom storefront and admin for product brands that need personalization, variants, uploads, shipping rules, payment integrations, SEO controls and content curation.',
     description:
-      'Stop renting your storefront. idesignsouq is a custom ecommerce platform you own outright: keep 100% of revenue, host it anywhere, and generate studio-quality product imagery without leaving the admin.',
+      'A commerce system built for brands whose catalogue needs more than a standard theme: variant-level personalization, file uploads, curated occasions, product media, inventory, shipping rules, Stripe/Tamara checkout, order lifecycle, SEO fields and a real admin workflow.',
     icon: 'cart',
     accentHue: 200,
-    liveUrl: 'https://ecommerce.autometa.ae',
-    liveLabel: 'ecommerce.autometa.ae',
     audience:
       'Retail and product brands wanting off SaaS fees or dated platforms like PrestaShop, especially sellers of personalized, gift and home-decor products.',
-    pricing: 'One-time from AED 5,000: admin panel + storefront + first month of SEO. Managed backend included.',
+    engagement: 'Best fit for product brands that need a custom storefront, admin workflow, inventory control and payment integrations around their own catalogue.',
     highlights: [
-      'No monthly fees, no 2% transaction skim',
-      'AI product photoshoots inside the admin',
-      'Real-time LiveView dashboard',
-      'Stripe + Tamara (buy-now-pay-later)',
+      'Variant-level personalization and customer file uploads',
+      'Curated homepage, occasions and featured product workflows',
+      'Stripe + Tamara checkout with shipping rule control',
+      'Mobile admin tables, filters, SEO fields and order operations',
     ],
     painPoints: [
       {
-        title: 'Renting your own store',
+        title: 'Generic storefronts limit the workflow',
         description:
-          'Shopify and Wix charge $24 to $39 a month plus 2% per sale, forever. Own your storefront once and keep every dirham.',
+          'Personalized products, gifting flows, fulfillment and catalogue migration need more control than a basic theme can provide.',
       },
       {
-        title: 'Everything is a paid plugin',
+        title: 'Too many disconnected tools',
         description:
-          'SEO, analytics and audit trails cost extra elsewhere. Here they are built in, with your data fully yours.',
+          'Orders, product media, SEO fields, analytics, stock and payment events belong in one admin surface.',
       },
       {
         title: 'Product photography is expensive',
@@ -317,41 +287,37 @@ export const products: Product[] = [
       { title: 'Storefront', description: 'Fast, mobile-responsive store with category browsing, instant search and rich product pages.', icon: 'store' },
       { title: 'Cart & Checkout', description: 'Discount codes, secure Stripe checkout, shipping / billing addresses and order confirmation.', icon: 'cart' },
       { title: 'Product Personalization', description: 'Per-item engraving, gift messages and file uploads, built for custom and gift products.', icon: 'sparkles' },
-      { title: 'AI Product Photoshoots', description: 'Generate studio-quality product imagery in the admin with Flux Kontext, Seedream and Mystic.', icon: 'image' },
-      { title: 'Real-Time Admin', description: 'A LiveView dashboard where orders, revenue and low-stock alerts update with no page reloads.', icon: 'bolt' },
+      { title: 'AI Product Imagery', description: 'Admin image-generation workflows can use Freepik models such as Flux Kontext, Seedream and Mystic.', icon: 'image' },
+      { title: 'Real-Time Admin', description: 'An operations dashboard where orders, revenue and low-stock alerts update without slowing the team down.', icon: 'bolt' },
       { title: 'Inventory & Variants', description: 'Size / colour variants, media, SEO fields, stock tracking and CSV import / export.', icon: 'box' },
       { title: 'Orders & Fulfillment', description: 'Status updates, tracking, refunds and transactional emails for every stage.', icon: 'receipt' },
       { title: 'Analytics Built-In', description: 'Revenue charts, top sellers, sales by category and visitor stats. No plugins.', icon: 'chart' },
     ],
-    stats: [
-      { value: '0%', label: 'Transaction fees' },
-      { value: 'AED 0', label: 'Monthly subscription' },
-      { value: 'AI', label: 'Photoshoots included' },
-      { value: 'Live', label: 'In production' },
-    ],
-    techStack: 'Elixir/Phoenix + Ash + PostgreSQL admin · Astro + Tailwind storefront on Cloudflare · Stripe + Tamara',
+    cta: {
+      primary: { label: 'Map a commerce workflow', message: "Hi Autometa, I'd like to discuss a custom ecommerce operations workflow." },
+      secondary: { label: 'Discuss my catalogue', message: "Hi Autometa, I'd like to talk about a custom storefront and admin for my catalogue." },
+    },
   },
   {
     slug: 'billing-operations',
     name: 'Printing Press Workflow System',
     category: 'Print & operations',
-    badge: 'Audit-ready by design',
-    tagline: 'Every quote becomes a paid, compliant invoice.',
+    badge: 'Print operations system',
+    tagline: 'Quotes, job cards, delivery notes and VAT docs in one controlled flow.',
     summary:
-      'Runs a printing press end-to-end, from quote and job card to delivery note, VAT invoice and payment, without a single number falling through the cracks.',
+      'A UAE print-shop workflow for estimates, job cards, delivery notes, VAT invoices, payments, credit notes, stock movement history and accounting exports.',
     description:
-      'The system connects the entire document lifecycle of a print shop into one timeline. Drafts stay editable; issuing locks a record as an immutable, FTA-compliant legal document with gap-free numbering and a full audit trail.',
+      'A print operations system that connects estimates, job orders, delivery notes, invoices, payments, credit notes, customer statements, stock movements and accounting exports into one controlled workflow.',
     icon: 'printer',
     accentHue: 150,
     audience:
-      'Printing presses and print shops in the UAE that must issue FTA-compliant tax invoices in AED.',
-    pricing: 'Project pricing on request, scoped to your operation.',
+      'Printing presses and print shops in the UAE that must issue FTA-compliant tax invoices and track every job document cleanly.',
+    engagement: 'Best fit for UAE print shops that need document control, VAT-ready invoices, stock movement history and receivables reporting.',
     highlights: [
       'Estimate → job card → delivery note → invoice → payment',
-      'Final amount tracking',
-      'Customer account history',
-      'Receivables',
-      'VAT export',
+      'Gap-free counters for estimates, jobs, invoices and credit notes',
+      'Stock movement ledger with deductions and reversals',
+      'Receivables, customer statements and accounting exports',
     ],
     painPoints: [
       {
@@ -376,22 +342,19 @@ export const products: Product[] = [
       { step: '3', title: 'Invoice & Pay', description: 'Issue a VAT invoice, record payment, and track the outstanding balance to zero.' },
     ],
     features: [
-      { title: 'Full Document Lifecycle', description: 'Estimate → Job Card → Delivery → Invoice → Payment → Credit Note → Refund, linked in one timeline.', icon: 'receipt' },
+      { title: 'Full Document Lifecycle', description: 'Estimate → Job Card → Delivery Note → Invoice → Payment → Credit Note → Refund, linked in one timeline.', icon: 'receipt' },
       { title: 'Draft-to-Issued Workflow', description: 'Drafts stay editable; issuing locks the record as an immutable legal document.', icon: 'lock' },
-      { title: 'Gap-Free Numbering', description: 'Dedicated counters guarantee unbroken invoice and estimate numbers for audit.', icon: 'hash' },
+      { title: 'Gap-Free Counters', description: 'Dedicated per-year counters back estimate, job, delivery, invoice and credit-note number series.', icon: 'hash' },
       { title: 'UAE VAT & TRN', description: 'VAT rate, buyer / seller TRN and totals snapshotted at issue time so documents never drift.', icon: 'shield' },
       { title: 'Payments & Outstanding', description: 'Record cash, card, transfer or cheque with auto-calculated balances and payment status.', icon: 'calculator' },
       { title: 'Credit Notes & Refunds', description: 'Correct issued invoices the legal way, with stock automatically returned.', icon: 'arrows' },
       { title: 'Inventory Management', description: 'Stock by unit with cost, low-stock thresholds and automatic deduction on issue.', icon: 'box' },
       { title: 'Full Audit Trail', description: 'Every change versioned with the responsible user. Print-ready docs plus CSV / XLS exports.', icon: 'history' },
     ],
-    stats: [
-      { value: '7', label: 'Linked document types' },
-      { value: '5 yr', label: 'FTA retention, automatic' },
-      { value: '0', label: 'Gaps in numbering' },
-      { value: '100%', label: 'Tamper-proof when issued' },
-    ],
-    techStack: 'Elixir/Phoenix 1.8 LiveView · Ash 3.0 · PostgreSQL · AshPaperTrail audit log',
+    cta: {
+      primary: { label: 'Map a print workflow', message: "Hi Autometa, I'd like to discuss a print-shop workflow system." },
+      secondary: { label: 'Discuss my documents', message: "Hi Autometa, I'd like to map our estimates, delivery notes, invoices and payments." },
+    },
   },
 ];
 
@@ -424,12 +387,12 @@ export const faqs: FaqItem[] = [
   {
     question: 'Can staff have different access levels?',
     answer:
-      'Yes. We can create roles such as owner, manager, staff, accountant, technician, sales, or admin.',
+      'Yes. We can create permission levels so each person only sees the areas and actions needed for their work.',
   },
   {
     question: 'Can the software work on mobile?',
     answer:
-      'Yes. Depending on the project, we can build responsive web apps or installable PWAs that work on desktop and mobile.',
+      'Yes. Depending on the project, we can build systems that work cleanly on desktop, tablet and mobile.',
   },
   {
     question: 'Can you integrate WhatsApp?',
@@ -439,7 +402,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'Can you integrate payments, Zoho, Stripe, Tamara, or other tools?',
     answer:
-      'Yes. We can connect external tools when APIs or supported integration methods are available.',
+      'Yes. We can connect external tools when they provide reliable integration methods.',
   },
   {
     question: 'How long does a project take?',

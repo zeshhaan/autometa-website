@@ -17,7 +17,7 @@ const {
   image = '/og.png',
 } = Astro.props;
 
-const fullTitle = title ? `${title} · Autometa` : 'Autometa · Software that pays for itself';
+const fullTitle = title ? `${title} · Autometa` : 'Autometa · Operations software for growing businesses';
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://autometa.ae').href;
 ---
 
@@ -26,8 +26,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://autometa.ae
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
