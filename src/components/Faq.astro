@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+import { faqs } from '../data/site';
+---
+
+<div class="mx-auto mt-12 grid max-w-3xl gap-3">
+  {faqs.map((faq, i) => (
+    <details
+      class="reveal group rounded-lg border border-border bg-card px-5 transition-colors hover:border-border-strong card-highlight"
+      style={`--reveal-delay: ${i * 50}ms`}
+    >
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left text-[15px] font-medium text-foreground [&::-webkit-details-marker]:hidden">
+        {faq.question}
+        <Icon
+          name="arrow-right"
+          size={18}
+          class="shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-90"
+        />
+      </summary>
+      <p class="pb-5 text-sm leading-relaxed text-muted-foreground">{faq.answer}</p>
+    </details>
+  ))}
+</div>

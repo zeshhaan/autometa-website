@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = site.description,
+  image = '/og.png',
+} = Astro.props;
+
+const fullTitle = title ? `${title} · Autometa` : 'Autometa · Operations software for growing businesses';
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://autometa.ae').href;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Autometa" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0c0d12" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f7fa" media="(prefers-color-scheme: light)" />
+
+    <link rel="preload" href="/fonts/InstrumentSans.ttf" as="font" type="font/ttf" crossorigin />
+
+    <!-- Set theme before paint to avoid a flash. Defaults to dark. -->
+    <script is:inline>
+      (() => {
+        document.documentElement.classList.add('js');
+        try {
+          const stored = localStorage.getItem('theme');
+          const isLight = stored === 'light';
+          document.documentElement.classList.toggle('dark', !isLight);
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen antialiased">
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppButton />
+
+    <!-- Reveal-on-scroll -->
+    <script is:inline>
+      (() => {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const els = document.querySelectorAll('.reveal');
+        if (reduce || !('IntersectionObserver' in window)) {
+          els.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+        );
+        els.forEach((el) => io.observe(el));
+      })();
+    </script>
+  </body>
+</html>

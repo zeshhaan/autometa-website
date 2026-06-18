@@ -1,0 +1,131 @@
+---
+import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import { navLinks } from '../data/site';
+---
+
+<nav class="fixed inset-x-0 top-2 z-50 flex justify-center px-2 md:px-4" aria-label="Main">
+  <div
+    id="navbar"
+    class="navbar relative flex w-full items-center justify-between rounded-lg px-3 py-1.5 text-foreground"
+  >
+    <a href="/" class="flex items-center gap-2 rounded-md px-1 py-1 text-sm font-medium transition-opacity hover:opacity-80">
+      <Logo class="size-4" />
+      <span>Autometa</span>
+    </a>
+
+    <div class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="rounded-md px-3 py-1.5 text-xs text-foreground/70 transition-colors hover:text-foreground"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="hidden items-center gap-1.5 md:flex">
+      <ThemeToggle />
+      <Button href="/#contact" size="sm" data-contact-modal>Schedule call</Button>
+    </div>
+
+    <div class="flex items-center gap-1 md:hidden">
+      <ThemeToggle />
+      <button
+        id="nav-menu-btn"
+        type="button"
+        class="inline-flex size-9 cursor-pointer items-center justify-center rounded-md text-foreground/80 transition-transform duration-150 ease-out hover:bg-card-muted active:scale-90 focus-visible:outline-none"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+      >
+        <span id="nav-icon-open"><Icon name="menu" size={20} /></span>
+        <span id="nav-icon-close" class="hidden"><Icon name="x" size={20} /></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="nav-mobile" class="absolute top-full left-0 mt-2 hidden w-full px-2 md:hidden">
+    <div class="mx-auto max-w-5xl rounded-lg border border-border bg-card/90 p-3 shadow-lg backdrop-blur-md">
+      <div class="flex flex-col">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="nav-mobile-link rounded-md px-3 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-card-muted hover:text-foreground"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+      <a
+        href="/#contact"
+        data-contact-modal
+        class="nav-mobile-link mt-2 flex h-10 items-center justify-center rounded-md bg-linear-to-b from-gradient-from to-gradient-to text-sm font-medium text-primary"
+      >
+        Schedule call
+      </a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    max-width: 64rem;
+    border: 1px solid transparent;
+    transition:
+      background-color 0.3s var(--ease-navbar),
+      border-color 0.3s var(--ease-navbar),
+      box-shadow 0.3s var(--ease-navbar),
+      backdrop-filter 0.3s var(--ease-navbar),
+      max-width 0.3s var(--ease-navbar);
+  }
+
+  /* Mobile: the pill is always elevated for legibility */
+  @media (max-width: 1023px) {
+    .navbar {
+      background-color: color-mix(in oklab, var(--card) 78%, transparent);
+      border-color: var(--border);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  /* Desktop: transparent at the top, elevates once scrolled */
+  @media (min-width: 1024px) {
+    .navbar.is-scrolled {
+      max-width: 56rem;
+      background-color: color-mix(in oklab, var(--card) 75%, transparent);
+      border-color: var(--border);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-md);
+    }
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => navbar?.classList.toggle('is-scrolled', window.scrollY > 12);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const btn = document.getElementById('nav-menu-btn');
+  const menu = document.getElementById('nav-mobile');
+  const iconOpen = document.getElementById('nav-icon-open');
+  const iconClose = document.getElementById('nav-icon-close');
+  const setOpen = (open: boolean) => {
+    if (!menu || !btn) return;
+    menu.classList.toggle('hidden', !open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    iconOpen?.classList.toggle('hidden', open);
+    iconClose?.classList.toggle('hidden', !open);
+  };
+  btn?.addEventListener('click', () => setOpen(menu?.classList.contains('hidden') ?? true));
+  menu?.querySelectorAll('.nav-mobile-link').forEach((el) =>
+    el.addEventListener('click', () => setOpen(false)),
+  );
+</script>

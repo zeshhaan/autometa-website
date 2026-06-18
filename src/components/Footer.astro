@@ -1,0 +1,53 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site, products } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-border">
+  <div class="mx-auto w-full max-w-6xl container-px py-14">
+    <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div class="flex flex-col gap-4">
+        <a href="/" class="flex items-center gap-2 text-sm font-medium">
+          <Logo class="size-5" />
+          <span>Autometa</span>
+        </a>
+        <p class="max-w-xs text-sm leading-relaxed text-muted-foreground">
+          {site.description}
+        </p>
+        <a
+          href={`mailto:${site.email}`}
+          class="inline-flex w-fit items-center gap-2 text-sm text-foreground/80 transition-colors hover:text-foreground"
+        >
+          <Icon name="mail" size={16} />
+          {site.email}
+        </a>
+      </div>
+
+      <nav class="flex flex-col gap-3" aria-label="Solutions">
+        <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Solutions</h3>
+        {products.map((p) => (
+          <a href={`/solutions/${p.slug}`} class="text-sm text-foreground/75 transition-colors hover:text-foreground">
+            {p.name}
+          </a>
+        ))}
+      </nav>
+
+      <nav class="flex flex-col gap-3" aria-label="Company">
+        <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Company</h3>
+        <a href="/#services" class="text-sm text-foreground/75 transition-colors hover:text-foreground">Services</a>
+        <a href="/#why" class="text-sm text-foreground/75 transition-colors hover:text-foreground">Why Autometa</a>
+        <a href="/#work" class="text-sm text-foreground/75 transition-colors hover:text-foreground">Work</a>
+        <a href="/#faq" class="text-sm text-foreground/75 transition-colors hover:text-foreground">FAQ</a>
+        <a href="/#contact" class="text-sm text-foreground/75 transition-colors hover:text-foreground">Contact</a>
+      </nav>
+    </div>
+
+    <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
+      <p>© {year} Autometa. Operations software for growing businesses.</p>
+      <p class="font-mono">Built for practical business workflows</p>
+    </div>
+  </div>
+</footer>

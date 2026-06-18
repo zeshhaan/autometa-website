@@ -1,0 +1,22 @@
+{
+  "name": "autometa",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "astro build && wrangler deploy",
+    "cf:preview": "astro build && wrangler dev"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.6",
+    "slot-text": "^0.2.2",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "wrangler": "^4.42.0"
+  }
+}

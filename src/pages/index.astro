@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Background from '../components/Background.astro';
+import ShinyBadge from '../components/ShinyBadge.astro';
+import SlotBadge from '../components/SlotBadge.astro';
+import Button from '../components/Button.astro';
+import SolutionCard from '../components/SolutionCard.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import Integrations from '../components/Integrations.astro';
+import Faq from '../components/Faq.astro';
+import { products, services, differentiators, site } from '../data/site';
+
+const processSteps = [
+  { step: '01', title: 'Discovery', description: 'We map how your business actually runs (the workflows, the edge cases, the spreadsheets holding it together) and scope a clear plan.' },
+  { step: '02', title: 'Design & build', description: 'You see a working version in weeks, not months. We ship in increments so you can react early and steer the direction.' },
+  { step: '03', title: 'Launch & migrate', description: 'We move your data off the old system, train your team, and go live with hosting, security and backups handled.' },
+  { step: '04', title: 'Run & improve', description: 'We monitor the live system, fix issues, and improve the workflow based on real staff and owner feedback.' },
+];
+---
+
+<Layout>
+  <!-- ░░ HERO ░░ -->
+  <section class="relative flex min-h-[90svh] items-center justify-center overflow-hidden pb-20 pt-28">
+    <Background />
+    <div class="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-5 text-center">
+      <div class="reveal">
+        <SlotBadge />
+      </div>
+
+      <h1
+        class="reveal mt-6 text-balance text-4xl font-medium leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl"
+        style="--reveal-delay: 80ms"
+      >
+        Software for the way<br class="hidden sm:block" /> your business actually runs.
+      </h1>
+
+      <p
+        class="reveal mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg"
+        style="--reveal-delay: 160ms"
+      >
+        Autometa builds custom web-based systems for shops, studios, ecommerce brands,
+        print operations and service teams. We have built vertical tools for POS,
+        automotive detailing, ecommerce and print workflows, and we can map the next
+        one around how your business really operates.
+      </p>
+
+      <div class="reveal mt-9 flex flex-col items-center gap-3 sm:flex-row" style="--reveal-delay: 240ms">
+        <Button href="#contact" size="lg" iconRight="arrow-right" data-contact-modal>Schedule a workflow call</Button>
+        <Button href="#solutions" size="lg" variant="secondary">Explore our work</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ SERVICES ░░ -->
+  <Section
+    id="services"
+    eyebrow="What we do"
+    title="From a single automation to a platform you run the business on"
+    description="We design, build, and run custom software end-to-end, then stay on to support it. One team for the whole workflow."
+  >
+    <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s, i) => (
+        <FeatureCard icon={s.icon} title={s.name} description={s.description} index={i} />
+      ))}
+    </div>
+  </Section>
+
+  <!-- ░░ SOLUTIONS / PRODUCTS ░░ -->
+  <Section
+    id="solutions"
+    eyebrow="Our work"
+    title="Vertical systems we know how to build"
+    description="These are not generic templates. They are examples of workflow depth we can bring to different trades, then adapt to the next business that needs something specific."
+  >
+    <div class="mt-14 grid gap-5 md:grid-cols-2">
+      {products.map((p, i) => (
+        <SolutionCard product={p} index={i} />
+      ))}
+    </div>
+  </Section>
+
+  <!-- ░░ INTEGRATIONS ░░ -->
+  <Integrations />
+
+  <!-- ░░ WHY US ░░ -->
+  <Section
+    id="why"
+    eyebrow="Why Autometa"
+    title="Because your business is too specific for generic software."
+    description="Off-the-shelf tools force your business to bend around them. We do the opposite: software shaped around how you already work."
+  >
+    <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {differentiators.map((d, i) => (
+        <FeatureCard icon={d.icon} title={d.name} description={d.description} index={i} />
+      ))}
+    </div>
+  </Section>
+
+  <!-- ░░ PROCESS / WORK ░░ -->
+  <Section
+    id="work"
+    eyebrow="How we work"
+    title="A clear path from idea to running software"
+    description="No black boxes. You see progress early and own everything at the end."
+  >
+    <div class="mt-14 grid gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+      {processSteps.map((p, i) => (
+        <div class="reveal flex flex-col gap-3 bg-card p-7" style={`--reveal-delay: ${i * 70}ms`}>
+          <span class="font-mono text-sm text-accent">{p.step}</span>
+          <h3 class="text-lg font-medium tracking-tight text-foreground">{p.title}</h3>
+          <p class="text-sm leading-relaxed text-muted-foreground">{p.description}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- ░░ FAQ ░░ -->
+  <Section
+    id="faq"
+    eyebrow="FAQ"
+    title="Questions, answered"
+    description="The things business owners ask us most before getting started."
+  >
+    <Faq />
+  </Section>
+
+  <!-- ░░ CONTACT / CTA ░░ -->
+  <section id="contact" class="relative overflow-hidden py-24 md:py-32">
+    <div class="pointer-events-none absolute inset-0 grid-backdrop opacity-60"></div>
+    <div class="relative mx-auto max-w-3xl container-px text-center">
+      <div class="reveal"><ShinyBadge icon="rocket">Let's build</ShinyBadge></div>
+      <h2 class="reveal mt-6 text-balance text-3xl font-medium tracking-tight text-foreground md:text-5xl" style="--reveal-delay: 80ms">
+        Ready to map your workflow?
+      </h2>
+      <p class="reveal mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg" style="--reveal-delay: 140ms">
+        Book a focused conversation. Show us how work enters, moves, gets billed,
+        and gets reported today; we'll tell you what a custom system should handle
+        first and what can wait.
+      </p>
+      <div class="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="--reveal-delay: 200ms">
+        <Button
+          href={`https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}`}
+          external
+          size="lg"
+          icon="whatsapp"
+        >
+          Schedule on WhatsApp
+        </Button>
+        <Button href={`mailto:${site.email}`} size="lg" variant="secondary" icon="mail">
+          {site.email}
+        </Button>
+      </div>
+      <p class="reveal mt-6 text-sm text-muted-foreground" style="--reveal-delay: 260ms">
+        Already using another system? We can plan a controlled migration around the data you can export.
+      </p>
+    </div>
+  </section>
+</Layout>

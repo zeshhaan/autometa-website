@@ -1,0 +1,49 @@
+---
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  align?: 'left' | 'center';
+  class?: string;
+  innerClass?: string;
+}
+
+const {
+  id,
+  eyebrow,
+  title,
+  description,
+  align = 'center',
+  class: className = '',
+  innerClass = '',
+} = Astro.props;
+
+const alignment = align === 'center' ? 'mx-auto text-center items-center' : 'text-left items-start';
+const hasHeader = eyebrow || title || description;
+---
+
+<section id={id} class={`relative py-20 md:py-28 ${className}`}>
+  <div class={`mx-auto w-full max-w-6xl container-px ${innerClass}`}>
+    {hasHeader && (
+      <header class={`flex max-w-2xl flex-col gap-4 ${alignment}`}>
+        {eyebrow && (
+          <span class="reveal font-mono text-xs uppercase tracking-[0.2em] text-accent">
+            {eyebrow}
+          </span>
+        )}
+        {title && (
+          <h2 class="reveal text-balance text-3xl font-medium tracking-tight text-foreground md:text-4xl" style="--reveal-delay: 60ms">
+            {title}
+          </h2>
+        )}
+        {description && (
+          <p class="reveal text-pretty text-base leading-relaxed text-muted-foreground md:text-lg" style="--reveal-delay: 120ms">
+            {description}
+          </p>
+        )}
+      </header>
+    )}
+    <slot />
+  </div>
+</section>
