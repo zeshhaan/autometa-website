@@ -3,61 +3,69 @@ export const site = {
   domain: 'autometa.ae',
   email: 'hello@autometa.ae',
   whatsapp: '+971544354211',
-  tagline: 'Custom operations software for serious workflows.',
+  tagline: 'World-class products, built end to end.',
   description:
-    'Autometa builds custom web-based operations software for retail, automotive, ecommerce, print and service businesses that need billing, stock, payments, documents, reporting and customer communication in one connected workflow.',
+    'Autometa is a product studio. We take ideas from first conversation to a product people rely on: strategy, design, engineering, AI and growth, delivered by one team that stays after launch.',
 };
 
 export const navLinks = [
-  { label: 'Services', href: '/#services' },
-  { label: 'Solutions', href: '/#solutions' },
-  { label: 'Integrations', href: '/#integrations' },
+  { label: 'What we build', href: '/#build' },
+  { label: 'Industries', href: '/#industries' },
+  { label: 'Capabilities', href: '/#capabilities' },
   { label: 'Why us', href: '/#why' },
   { label: 'FAQ', href: '/#faq' },
 ];
 
-export interface Service {
+export interface Capability {
   name: string;
   description: string;
   icon: string;
+  items: string[];
 }
 
-export const services: Service[] = [
+/** The disciplines we bring to every product, in the order a project uses them. */
+export const capabilities: Capability[] = [
   {
-    name: 'Custom Software',
+    name: 'Product strategy',
     description:
-      'Bespoke operations platforms (POS, billing, CRM, inventory and job management) built around how your business actually works.',
-    icon: 'box',
-  },
-  {
-    name: 'Ecommerce Builds',
-    description:
-      'Custom online stores with real-time admin, product personalization, AI-assisted product imagery, inventory and payment integrations.',
-    icon: 'cart',
-  },
-  {
-    name: 'Website Development',
-    description:
-      'Fast, modern marketing sites and web apps engineered for SEO and conversions. New builds, redesigns, and rescues.',
-    icon: 'code',
-  },
-  {
-    name: 'SEO & Growth',
-    description:
-      'Technical SEO, analytics and content structure for businesses that need their website to generate qualified enquiries.',
+      'We start with the problem, not the screens. We work out who the product is for, what it has to do first, and what can wait.',
     icon: 'search',
+    items: ['Discovery & workflow audits', 'Scoping & roadmaps', 'MVP definition'],
   },
   {
-    name: 'AI & Automation',
+    name: 'Design',
     description:
-      'Chatbots, document extraction, WhatsApp workflows and back-office automation that retire the repetitive work.',
+      'Interfaces that feel obvious to the people using them every day, from the first sketch to a consistent design system.',
+    icon: 'layers',
+    items: ['UX flows & prototypes', 'Interface design', 'Design systems'],
+  },
+  {
+    name: 'Engineering',
+    description:
+      'Fast, reliable software built properly from the start, on whatever platform your users are: browser, phone or desktop.',
+    icon: 'code',
+    items: ['Web, mobile & desktop apps', 'Ecommerce & websites', 'APIs & integrations'],
+  },
+  {
+    name: 'AI & automation',
+    description:
+      'AI where it actually earns its place, plus the automations that take repetitive work off your team.',
     icon: 'sparkles',
+    items: ['AI features & assistants', 'Document & image workflows', 'WhatsApp & back-office automation'],
   },
   {
-    name: 'CMS & Integrations',
+    name: 'Growth',
     description:
-      'Content management, payments, WhatsApp workflows, and third-party tools wired cleanly into your business process.',
-    icon: 'plug',
+      'Launching is the start. We make sure the product gets found, gets used, and tells you what is working.',
+    icon: 'chart',
+    items: ['Technical SEO', 'Analytics & reporting', 'Conversion improvements'],
+  },
+  {
+    name: 'Run & evolve',
+    description:
+      'Hosting, security, integrations and ongoing improvements, handled by the same team that built it.',
+    icon: 'shield',
+    items: ['Hosting & monitoring', 'Integrations & data migration', 'Support & iteration'],
   },
 ];
 
@@ -69,43 +77,217 @@ export interface Differentiator {
 
 export const differentiators: Differentiator[] = [
   {
-    name: 'We understand the workflow before writing code',
+    name: 'One team, the whole product',
     description:
-      "We don't start with screens. We first understand how your business runs today: who does what, where mistakes happen, what is repeated, and what the owner needs to see.",
+      'Strategy, design, engineering and growth sit in one team. Nothing gets lost in a handover between agencies.',
+    icon: 'users',
+  },
+  {
+    name: 'We understand the problem first',
+    description:
+      'Before we design anything, we learn how the work happens today: who does what, where things break, and what success looks like.',
     icon: 'search',
   },
   {
-    name: 'We build around your business, not a fixed template',
+    name: 'Craft in the details',
     description:
-      'Your business should not adjust itself to generic software. The software should adjust to your business.',
+      'Fast pages, clear interfaces, correct documents and edge cases handled. The details are what make a product feel world-class.',
+    icon: 'sparkles',
+  },
+  {
+    name: 'Built around you, not a template',
+    description:
+      'Your business should not bend to generic software. We shape the product around how you actually work and where you want to go.',
     icon: 'layers',
   },
   {
-    name: 'We replace scattered work with one connected system',
+    name: 'You see progress early',
     description:
-      'WhatsApp, Excel, paper, invoices, stock, staff tasks, and reports can be connected into one workflow.',
-    icon: 'plug',
-  },
-  {
-    name: 'We focus on owner visibility',
-    description:
-      'Owners should know what is pending, what is delayed, what is unpaid, who is responsible, and what needs attention.',
-    icon: 'chart',
-  },
-  {
-    name: 'We can start from your existing process',
-    description:
-      'Already using Excel, paper, another software, or WhatsApp? We can study your current flow and help migrate important data where possible.',
-    icon: 'arrows',
+      'We ship in increments, so you can use real software within weeks and steer the direction as it takes shape.',
+    icon: 'bolt',
   },
   {
     name: 'We stay after launch',
     description:
-      "We don't treat software as one-shot delivery. We improve it based on real usage, staff feedback, and business changes.",
-    icon: 'shield',
+      'A product is never finished. We keep improving it based on real usage, feedback and how your business changes.',
+    icon: 'rocket',
   },
 ];
 
+export type BuildVisual = 'consult' | 'browser' | 'phone' | 'desktop' | 'agent' | 'store' | 'automation';
+
+export interface BuildArea {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  icon: string;
+  accentHue: number;
+  points: string[];
+  /** Which styled mock to show when no image is set. */
+  visual: BuildVisual;
+  /**
+   * Optional screenshot or stock photo, served from /public (for example
+   * '/images/build/mobile.webp'). When omitted, the styled mock is shown instead.
+   */
+  image?: { src: string; alt: string };
+}
+
+/** What we build. Rendered as alternating text + visual rows on the homepage. */
+export const buildAreas: BuildArea[] = [
+  {
+    id: 'consulting',
+    eyebrow: 'Consulting',
+    title: 'Clarity before code',
+    description:
+      'Not sure what to build, or whether to build at all? We help you work out the right product, the right scope and the right technology, and give you a plan you can act on.',
+    icon: 'search',
+    accentHue: 300,
+    visual: 'consult',
+    points: [
+      'Product and technology strategy',
+      'Workflow audits and process mapping',
+      'Scoping, roadmaps and MVP definition',
+      'Technical reviews of existing products',
+    ],
+  },
+  {
+    id: 'web-apps',
+    eyebrow: 'Web apps',
+    title: 'Platforms your business runs on',
+    description:
+      'Browser-based products that work on any device: customer-facing apps, SaaS platforms, and the internal systems behind billing, stock, jobs, CRM and reporting.',
+    icon: 'layers',
+    accentHue: 265,
+    visual: 'browser',
+    points: [
+      'SaaS products and customer portals',
+      'POS, billing, inventory and job management',
+      'Dashboards that show what needs attention',
+      'Roles, permissions and audit trails built in',
+    ],
+  },
+  {
+    id: 'mobile',
+    eyebrow: 'Mobile apps',
+    title: 'Apps people keep on their home screen',
+    description:
+      'iOS and Android apps designed for the moments people actually reach for their phone, connected to the same systems as the rest of your business.',
+    icon: 'phone',
+    accentHue: 200,
+    visual: 'phone',
+    points: [
+      'iOS and Android from one codebase',
+      'Customer apps and field-team tools',
+      'Push notifications, payments and offline support',
+      'App Store and Play Store launch handled',
+    ],
+  },
+  {
+    id: 'desktop',
+    eyebrow: 'Desktop apps',
+    title: 'Native-feeling apps for Mac, Windows and Linux',
+    description:
+      'For work that lives on a desk all day: fast desktop software with local files, hardware and offline access, kept in sync with the cloud.',
+    icon: 'box',
+    accentHue: 230,
+    visual: 'desktop',
+    points: [
+      'macOS, Windows and Linux builds',
+      'Printers, scanners and other hardware',
+      'Works offline, syncs when back online',
+      'Auto-updates and signed installers',
+    ],
+  },
+  {
+    id: 'agent-ready',
+    eyebrow: 'Agent-ready websites',
+    title: 'Websites built for people and AI agents',
+    description:
+      'More customers now find businesses through ChatGPT, Gemini and other assistants. We build sites that rank in search, read clearly to AI, and let agents act on them.',
+    icon: 'globe',
+    accentHue: 150,
+    visual: 'agent',
+    points: [
+      'Fast, conversion-focused marketing sites',
+      'Technical SEO and structured data',
+      'Clean, machine-readable content for AI answers',
+      'APIs and agent integrations so assistants can book, order or enquire',
+    ],
+  },
+  {
+    id: 'commerce',
+    eyebrow: 'Ecommerce',
+    title: 'Stores with a serious back office',
+    description:
+      'Custom storefronts for brands that have outgrown templates, with the admin, inventory and payment flows to run them properly.',
+    icon: 'cart',
+    accentHue: 30,
+    visual: 'store',
+    points: [
+      'Fast, mobile-first storefronts',
+      'Product personalization, variants and customer uploads',
+      'Stripe, Tamara and other checkout integrations',
+      'Real-time orders, stock and analytics in one admin',
+    ],
+  },
+  {
+    id: 'ai',
+    eyebrow: 'AI & automation',
+    title: 'AI that does real work',
+    description:
+      'Practical AI and automation built into your product or operations, so your team spends less time on repetitive tasks.',
+    icon: 'sparkles',
+    accentHue: 50,
+    visual: 'automation',
+    points: [
+      'Assistants and chatbots that know your business',
+      'Document extraction and smart data entry',
+      'AI product imagery and content workflows',
+      'WhatsApp updates, reminders and back-office automation',
+    ],
+  },
+];
+
+export interface Industry {
+  name: string;
+  description: string;
+  icon: string;
+}
+
+/** Industries we have built for. Add new ones here as the list grows. */
+export const industries: Industry[] = [
+  {
+    name: 'Retail',
+    description: 'POS, billing, multi-outlet stock, purchasing, GST and accounting for shops and chains.',
+    icon: 'store',
+  },
+  {
+    name: 'Automotive',
+    description: 'Enquiry-to-invoice workflows for detailing, PPF and ceramic studios, with UAE VAT built in.',
+    icon: 'car',
+  },
+  {
+    name: 'Ecommerce',
+    description: 'Custom storefronts, personalization, checkout and admin for product and gifting brands.',
+    icon: 'cart',
+  },
+  {
+    name: 'Print & production',
+    description: 'Estimates, job cards, delivery notes and FTA-compliant invoicing for print shops.',
+    icon: 'printer',
+  },
+  {
+    name: 'Service businesses',
+    description: 'Bookings, job tracking, customer updates and payments for teams that deliver services.',
+    icon: 'calendar',
+  },
+];
+
+/**
+ * Detailed product pages kept at /solutions/<slug>. They stay reachable by URL
+ * but are intentionally not linked from the nav, homepage or footer.
+ */
 export interface ProductFeature {
   title: string;
   description: string;
@@ -358,6 +540,7 @@ export const products: Product[] = [
   },
 ];
 
+
 export interface FaqItem {
   question: string;
   answer: string;
@@ -365,53 +548,53 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    question: 'Do you build ready-made software or custom software?',
+    question: 'What kind of products do you build?',
     answer:
-      'We build custom business software around your workflow. Some modules may be reusable, but the final system is shaped around how your business operates.',
+      'Web apps, mobile apps for iOS and Android, desktop apps for Mac, Windows and Linux, ecommerce stores, agent-ready websites and AI features. We also consult when you need a plan before you build.',
   },
   {
-    question: 'Can you improve our existing Excel/WhatsApp process?',
+    question: 'Do you only write code?',
     answer:
-      'Yes. Many projects start by studying existing Excel sheets, WhatsApp flows, printed forms, invoices, and manual processes.',
+      'No. We cover the whole product: working out what to build, designing it, building it, launching it, and growing and supporting it afterwards. You can bring us in at any stage.',
   },
   {
-    question: 'Can you import our old data?',
+    question: 'We only have an idea. Is that too early?',
     answer:
-      'Where export or clean records are available, we can help import customers, products, invoices, stock, job records, or other important data.',
+      'Not at all. Many projects start with a conversation and a rough idea. We help shape it into a clear first version before any building starts.',
   },
   {
-    question: 'Do you work with small businesses?',
+    question: 'Can you improve a product or process we already have?',
     answer:
-      'Yes. Autometa is especially useful for small and medium businesses that are growing beyond manual work.',
+      'Yes. We regularly start from existing software, spreadsheets, WhatsApp flows or paper processes, and either improve what is there or plan a controlled move to something better.',
   },
   {
-    question: 'Can staff have different access levels?',
+    question: 'Can you bring over our existing data?',
     answer:
-      'Yes. We can create permission levels so each person only sees the areas and actions needed for their work.',
+      'Where exports or clean records exist, we can migrate customers, products, invoices, stock, orders and other important data.',
   },
   {
-    question: 'Can the software work on mobile?',
+    question: 'Who do you work with?',
     answer:
-      'Yes. Depending on the project, we can build systems that work cleanly on desktop, tablet and mobile.',
+      'Founders, growing businesses and established teams. What they share is wanting something built properly rather than patched together.',
   },
   {
-    question: 'Can you integrate WhatsApp?',
+    question: 'Can you add AI to our product?',
     answer:
-      'Yes. We can integrate WhatsApp for invoices, job updates, reminders, campaigns, and customer communication depending on the business requirement.',
+      'Yes, where it genuinely helps: assistants, document extraction, image generation, smart search and automation. We will tell you honestly when AI is not the right tool.',
   },
   {
-    question: 'Can you integrate payments, Zoho, Stripe, Tamara, or other tools?',
+    question: 'Can you integrate WhatsApp, payments, Zoho or other tools?',
     answer:
-      'Yes. We can connect external tools when they provide reliable integration methods.',
+      'Yes. We connect WhatsApp, Stripe, Tamara, Zoho, Google, Meta and other services whenever they offer a reliable way to integrate.',
   },
   {
     question: 'How long does a project take?',
     answer:
-      'It depends on scope. A focused internal system can start with an MVP, then improve in phases after real usage.',
+      'It depends on scope. We usually start with a focused first version you can use within weeks, then improve it in phases based on real usage.',
   },
   {
     question: 'How do we start?',
     answer:
-      'We start with a workflow audit. You show us how your business currently runs, and we identify what can be computerized, automated, or simplified.',
+      'Book a call. Tell us what you want to build or fix, and we will come back with what the first version should include, how we would approach it, and what it involves.',
   },
 ];

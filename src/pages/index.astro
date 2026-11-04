@@ -5,17 +5,19 @@ import Background from '../components/Background.astro';
 import ShinyBadge from '../components/ShinyBadge.astro';
 import SlotBadge from '../components/SlotBadge.astro';
 import Button from '../components/Button.astro';
-import SolutionCard from '../components/SolutionCard.astro';
+import BuildRow from '../components/BuildRow.astro';
+import CapabilityCard from '../components/CapabilityCard.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import Integrations from '../components/Integrations.astro';
 import Faq from '../components/Faq.astro';
-import { products, services, differentiators, site } from '../data/site';
+import Icon from '../components/Icon.astro';
+import { buildAreas, industries, capabilities, differentiators, site } from '../data/site';
 
 const processSteps = [
-  { step: '01', title: 'Discovery', description: 'We map how your business actually runs (the workflows, the edge cases, the spreadsheets holding it together) and scope a clear plan.' },
-  { step: '02', title: 'Design & build', description: 'You see a working version in weeks, not months. We ship in increments so you can react early and steer the direction.' },
-  { step: '03', title: 'Launch & migrate', description: 'We move your data off the old system, train your team, and go live with hosting, security and backups handled.' },
-  { step: '04', title: 'Run & improve', description: 'We monitor the live system, fix issues, and improve the workflow based on real staff and owner feedback.' },
+  { step: '01', title: 'Discover', description: 'We get to the heart of the problem: who it is for, how the work happens today, and what the first version must get right.' },
+  { step: '02', title: 'Design & build', description: 'You see working software in weeks, not months. We design and ship in increments so you can react early and steer.' },
+  { step: '03', title: 'Launch', description: 'We go live with hosting, security, data migration and team onboarding handled, so launch day is uneventful.' },
+  { step: '04', title: 'Grow & evolve', description: 'We watch how the product is used, measure what matters, and keep improving it as your business grows.' },
 ];
 ---
 
@@ -32,50 +34,70 @@ const processSteps = [
         class="reveal mt-6 text-balance text-4xl font-medium leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl"
         style="--reveal-delay: 80ms"
       >
-        Software for the way<br class="hidden sm:block" /> your business actually runs.
+        We build world-class<br class="hidden sm:block" /> products, end to end.
       </h1>
 
       <p
         class="reveal mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg"
         style="--reveal-delay: 160ms"
       >
-        Autometa builds custom web-based systems for shops, studios, ecommerce brands,
-        print operations and service teams. We have built vertical tools for POS,
-        automotive detailing, ecommerce and print workflows, and we can map the next
-        one around how your business really operates.
+        Autometa is a product studio. Consulting, design and engineering for web,
+        mobile and desktop, agent-ready websites and AI, all under one roof, so your
+        idea goes from first conversation to a product people rely on.
       </p>
 
       <div class="reveal mt-9 flex flex-col items-center gap-3 sm:flex-row" style="--reveal-delay: 240ms">
-        <Button href="#contact" size="lg" iconRight="arrow-right" data-contact-modal>Schedule a workflow call</Button>
-        <Button href="#solutions" size="lg" variant="secondary">Explore our work</Button>
+        <Button href="#contact" size="lg" iconRight="arrow-right" data-contact-modal>Start a project</Button>
+        <Button href="#build" size="lg" variant="secondary">See what we build</Button>
       </div>
     </div>
   </section>
 
-  <!-- ░░ SERVICES ░░ -->
+  <!-- ░░ WHAT WE BUILD ░░ -->
   <Section
-    id="services"
-    eyebrow="What we do"
-    title="From a single automation to a platform you run the business on"
-    description="We design, build, and run custom software end-to-end, then stay on to support it. One team for the whole workflow."
+    id="build"
+    eyebrow="What we build"
+    title="Whatever the product, on whatever platform"
+    description="From the first strategy session to apps on the web, phone and desktop, we can take on the whole product or the part you need most."
   >
-    <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {services.map((s, i) => (
-        <FeatureCard icon={s.icon} title={s.name} description={s.description} index={i} />
+    <div class="mt-16 flex flex-col gap-20 md:gap-28">
+      {buildAreas.map((a, i) => (
+        <BuildRow area={a} index={i} />
       ))}
     </div>
   </Section>
 
-  <!-- ░░ SOLUTIONS / PRODUCTS ░░ -->
+  <!-- ░░ INDUSTRIES ░░ -->
   <Section
-    id="solutions"
-    eyebrow="Our work"
-    title="Vertical systems we know how to build"
-    description="These are not generic templates. They are examples of workflow depth we can bring to different trades, then adapt to the next business that needs something specific."
+    id="industries"
+    eyebrow="Industries"
+    title="Industries we know from the inside"
+    description="We have shipped products for these industries, so we already speak the language: the documents, the compliance, and the way the work really flows. New industry? We learn it properly before we build."
+    class="bg-card-muted/20 border-y border-border"
   >
-    <div class="mt-14 grid gap-5 md:grid-cols-2">
-      {products.map((p, i) => (
-        <SolutionCard product={p} index={i} />
+    <div class="mt-14 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-5">
+      {industries.map((ind, i) => (
+        <div class="reveal flex flex-col gap-3 bg-card p-6" style={`--reveal-delay: ${i * 60}ms`}>
+          <span class="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-card-muted text-accent">
+            <Icon name={ind.icon} size={20} />
+          </span>
+          <h3 class="text-base font-medium tracking-tight text-foreground">{ind.name}</h3>
+          <p class="text-sm leading-relaxed text-muted-foreground">{ind.description}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- ░░ CAPABILITIES ░░ -->
+  <Section
+    id="capabilities"
+    eyebrow="How we deliver"
+    title="Everything it takes to build a great product"
+    description="Most products stall in the gaps between strategy, design and development. We cover all of it with one team, so nothing gets lost along the way."
+  >
+    <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {capabilities.map((c, i) => (
+        <CapabilityCard capability={c} index={i} />
       ))}
     </div>
   </Section>
@@ -87,8 +109,8 @@ const processSteps = [
   <Section
     id="why"
     eyebrow="Why Autometa"
-    title="Because your business is too specific for generic software."
-    description="Off-the-shelf tools force your business to bend around them. We do the opposite: software shaped around how you already work."
+    title="A product partner, not just a dev shop."
+    description="We care about the outcome, not only the code. That changes how we work at every step."
   >
     <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {differentiators.map((d, i) => (
@@ -99,9 +121,9 @@ const processSteps = [
 
   <!-- ░░ PROCESS / WORK ░░ -->
   <Section
-    id="work"
+    id="process"
     eyebrow="How we work"
-    title="A clear path from idea to running software"
+    title="A clear path from idea to a product people use"
     description="No black boxes. You see progress early and own everything at the end."
   >
     <div class="mt-14 grid gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
@@ -120,7 +142,7 @@ const processSteps = [
     id="faq"
     eyebrow="FAQ"
     title="Questions, answered"
-    description="The things business owners ask us most before getting started."
+    description="The things people ask us most before getting started."
   >
     <Faq />
   </Section>
@@ -129,14 +151,14 @@ const processSteps = [
   <section id="contact" class="relative overflow-hidden py-24 md:py-32">
     <div class="pointer-events-none absolute inset-0 grid-backdrop opacity-60"></div>
     <div class="relative mx-auto max-w-3xl container-px text-center">
-      <div class="reveal"><ShinyBadge icon="rocket">Let's build</ShinyBadge></div>
+      <div class="reveal"><ShinyBadge icon="rocket">Let’s build</ShinyBadge></div>
       <h2 class="reveal mt-6 text-balance text-3xl font-medium tracking-tight text-foreground md:text-5xl" style="--reveal-delay: 80ms">
-        Ready to map your workflow?
+        Have a product in mind?
       </h2>
       <p class="reveal mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg" style="--reveal-delay: 140ms">
-        Book a focused conversation. Show us how work enters, moves, gets billed,
-        and gets reported today; we'll tell you what a custom system should handle
-        first and what can wait.
+        Whether it is a rough idea, a product that needs rescuing, or a business
+        that has outgrown its tools, tell us about it. We’ll tell you what the
+        first version should be and how we would build it.
       </p>
       <div class="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="--reveal-delay: 200ms">
         <Button
@@ -152,7 +174,7 @@ const processSteps = [
         </Button>
       </div>
       <p class="reveal mt-6 text-sm text-muted-foreground" style="--reveal-delay: 260ms">
-        Already using another system? We can plan a controlled migration around the data you can export.
+        Already have something live? We can improve it in place or plan a controlled move to something better.
       </p>
     </div>
   </section>

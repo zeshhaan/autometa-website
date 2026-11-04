@@ -8,7 +8,7 @@
 ---------------------------------------------------------------------------- */
 @font-face {
   font-family: "Instrument Sans";
-  src: url("/fonts/InstrumentSans.ttf") format("truetype");
+  src: url("/fonts/InstrumentSans.woff2") format("woff2");
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -149,6 +149,7 @@
     color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
@@ -226,12 +227,11 @@
    content is fully visible without JS (SEO / no-JS / resilience). */
 .js .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  filter: blur(8px);
+  transform: translateY(16px);
+  filter: blur(4px);
   transition: opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-smooth),
     filter 0.6s var(--ease-smooth);
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
 }
 
 .js .reveal.is-visible {

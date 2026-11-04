@@ -1,0 +1,418 @@
+---
+import Icon from './Icon.astro';
+import type { BuildArea } from '../data/site';
+
+interface Props {
+  area: BuildArea;
+  index?: number;
+}
+const { area, index = 0 } = Astro.props;
+const reversed = index % 2 === 1;
+const tint = (l: number, c: number, a = 1) => `oklch(${l} ${c} ${area.accentHue} / ${a})`;
+---
+
+<div class="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+  <!-- Copy -->
+  <div class={`reveal flex flex-col ${reversed ? 'md:order-2' : ''}`}>
+    <div class="flex items-center gap-3">
+      <span
+        class="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-card-muted"
+        style={`color: ${tint(0.72, 0.15)}`}
+      >
+        <Icon name={area.icon} size={20} />
+      </span>
+      <span class="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">{area.eyebrow}</span>
+    </div>
+    <h3 class="mt-5 text-balance text-2xl font-medium tracking-tight text-foreground md:text-3xl">{area.title}</h3>
+    <p class="mt-3 text-pretty text-base leading-relaxed text-muted-foreground">{area.description}</p>
+    <ul class="mt-6 grid gap-2.5">
+      {area.points.map((pt) => (
+        <li class="flex items-start gap-2 text-sm text-foreground/85">
+          <Icon name="check" size={16} class="mt-0.5 shrink-0 text-success" />
+          <span>{pt}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Visual: a real screenshot / photo when provided, otherwise a styled mock for the platform -->
+  <div class={`reveal ${reversed ? 'md:order-1' : ''}`} style="--reveal-delay: 120ms">
+    <div class="relative overflow-hidden rounded-xl border border-border bg-card shadow-xl card-highlight">
+      <div
+        class="pointer-events-none absolute -right-20 -top-20 size-64 rounded-full blur-3xl"
+        style={`background: ${tint(0.7, 0.16, 0.18)}`}
+      ></div>
+      {area.image ? (
+        <img
+          src={area.image.src}
+          alt={area.image.alt}
+          loading="lazy"
+          decoding="async"
+          class="relative aspect-[4/3] w-full object-cover"
+        />
+      ) : (
+        <div class="relative flex aspect-[4/3] items-center justify-center p-6" aria-hidden="true" data-bx>
+          {area.visual === 'phone' ? (
+            <div class="relative flex h-full w-full items-center justify-center">
+              {[1, 0].map((n) => (
+                <div
+                  class={`absolute h-[92%] ${n === 1 ? 'hidden translate-x-[42%] translate-y-[4%] rotate-[6deg] opacity-70 sm:block' : '-translate-x-[12%] -rotate-[3deg] sm:-translate-x-[22%]'}`}
+                >
+                <div
+                  class={`bx-float flex aspect-[9/19.5] h-full flex-col overflow-hidden rounded-[2.1rem] border border-border-strong bg-card p-[5px] shadow-2xl`}
+                  style={`animation-delay: ${n * -2}s`}
+                >
+                  <div class="relative flex flex-1 flex-col overflow-hidden rounded-[1.75rem] bg-card-muted/60">
+                    <div class="flex items-center justify-between px-4 pt-2.5">
+                      <span class="h-1.5 w-5 rounded-full bg-foreground/40"></span>
+                      <span class="h-[14px] w-14 rounded-full bg-background"></span>
+                      <span class="h-1.5 w-6 rounded-full bg-foreground/40"></span>
+                    </div>
+                    {n === 0 && (
+                      <div class="bx-toast absolute inset-x-2 top-7 z-10 flex items-center gap-2 rounded-xl border border-border bg-card/95 p-2 shadow-lg backdrop-blur">
+                        <span class="size-5 shrink-0 rounded-md" style={`background: ${tint(0.72, 0.15, 0.9)}`}></span>
+                        <span class="flex flex-1 flex-col gap-1">
+                          <span class="h-1.5 w-2/3 rounded-full bg-foreground/50"></span>
+                          <span class="h-1 w-1/2 rounded-full bg-border-strong"></span>
+                        </span>
+                      </div>
+                    )}
+                    {n === 0 ? (
+                      <div class="flex flex-1 flex-col gap-2.5 px-3 pt-4">
+                        <span class="h-2.5 w-1/2 rounded-full bg-foreground/50"></span>
+                        <span class="h-1.5 w-1/3 rounded-full bg-border-strong"></span>
+                        <div class="bx-shine relative mt-1 flex flex-col gap-1.5 overflow-hidden rounded-xl p-3" style={`background: ${tint(0.65, 0.14, 0.55)}`}>
+                          <span class="h-1.5 w-1/3 rounded-full bg-white/60"></span>
+                          <span class="h-3 w-2/3 rounded-full bg-white/85"></span>
+                          <span class="mt-2 h-1.5 w-1/2 rounded-full bg-white/50"></span>
+                        </div>
+                        {[0, 1, 2].map((k) => (
+                          <div class="bx-row flex items-center gap-2 rounded-lg border border-border bg-card px-2 py-1.5" style={`animation-delay: ${k * 0.25}s`}>
+                            <span class="size-5 shrink-0 rounded-md" style={`background: ${tint(0.72, 0.15, 0.25 + k * 0.15)}`}></span>
+                            <span class="flex flex-1 flex-col gap-1">
+                              <span class="h-1.5 w-3/4 rounded-full bg-border-strong"></span>
+                              <span class="h-1 w-1/2 rounded-full bg-border"></span>
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div class="flex flex-1 flex-col gap-2 px-3 pt-4">
+                        <span class="relative aspect-square w-full rounded-xl" style={`background: ${tint(0.72, 0.15, 0.3)}`}>
+                          <span class="bx-heart absolute right-2 top-2 size-4 rounded-full" style="background: oklch(0.68 0.2 15)"></span>
+                        </span>
+                        <span class="h-2 w-2/3 rounded-full bg-foreground/40"></span>
+                        <span class="h-1.5 w-1/3 rounded-full bg-border-strong"></span>
+                        <span class="bx-pulse mb-2 mt-auto h-6 rounded-full" style={`background: ${tint(0.72, 0.15, 0.8)}`}></span>
+                      </div>
+                    )}
+                    <div class="relative mt-auto grid grid-cols-4 justify-items-center border-t border-border bg-card/80 px-3 pb-1.5 pt-2">
+                      {[0, 1, 2, 3].map(() => (
+                        <span class="size-2.5 rounded-[4px] bg-border-strong"></span>
+                      ))}
+                      <!-- active tab indicator: one grid cell wide, hops by translateX(100%) steps -->
+                      <span class="bx-tab absolute left-3 top-2 flex w-[calc((100%-1.5rem)/4)] justify-center">
+                        <span class="size-2.5 rounded-[4px]" style={`background: ${tint(0.72, 0.15, 1)}`}></span>
+                      </span>
+                    </div>
+                    <span class="mx-auto mb-1.5 h-1 w-12 rounded-full bg-foreground/40"></span>
+                  </div>
+                </div>
+                </div>
+              ))}
+            </div>
+          ) : area.visual === 'consult' ? (
+            <div class="relative grid h-full w-full grid-cols-3 gap-3">
+              {['Discover', 'Define', 'Plan'].map((label, n) => (
+                <div class="flex flex-col gap-2 rounded-lg border border-border bg-card-muted/40 p-3">
+                  <span class="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span>
+                  {Array.from({ length: 4 - n }).map((_, k) => (
+                    <span
+                      class={`h-8 rounded-md border border-border ${k === 0 ? 'bx-glow' : ''}`}
+                      style={`background: ${tint(0.72, 0.15, k === 0 ? 0.45 : 0.12)}; animation-delay: ${n * 1.2}s`}
+                    ></span>
+                  ))}
+                </div>
+              ))}
+              <!-- an idea card travelling from Discover to Plan -->
+              <span
+                class="bx-travel absolute left-[2%] top-[46%] flex h-9 w-[28%] items-center gap-1.5 rounded-md border px-2 shadow-xl"
+                style={`background: ${tint(0.72, 0.15, 0.9)}; border-color: ${tint(0.8, 0.12, 1)}`}
+              >
+                <span class="size-3 rounded-full bg-white/80"></span>
+                <span class="h-1.5 flex-1 rounded-full bg-white/70"></span>
+              </span>
+            </div>
+          ) : area.visual === 'agent' ? (
+            <div class="flex h-full w-full flex-col gap-3 rounded-lg border border-border bg-card-muted/40 p-4">
+              <div class="bx-seq-1 ml-auto w-2/3 rounded-xl rounded-br-sm px-3 py-2" style={`background: ${tint(0.72, 0.15, 0.35)}`}>
+                <span class="block h-2 w-full rounded-full bg-foreground/30"></span>
+              </div>
+              <div class="relative">
+                <!-- typing indicator -->
+                <div class="bx-seq-typing absolute left-0 top-0 flex gap-1 rounded-xl rounded-bl-sm border border-border bg-card px-3 py-2.5">
+                  {[0, 1, 2].map((k) => (
+                    <span class="bx-dot size-1.5 rounded-full bg-muted-foreground" style={`animation-delay: ${k * 0.15}s`}></span>
+                  ))}
+                </div>
+                <div class="bx-seq-2 flex w-5/6 flex-col gap-2 rounded-xl rounded-bl-sm border border-border bg-card p-3">
+                  <span class="h-2 w-full rounded-full bg-border"></span>
+                  <span class="h-2 w-4/5 rounded-full bg-border"></span>
+                  <div class="bx-seq-3 mt-1 flex items-center gap-2 rounded-md border border-border p-2">
+                    <span class="flex size-6 items-center justify-center rounded-md text-white" style={`background: ${tint(0.72, 0.15, 0.9)}`}>
+                      <Icon name="check" size={14} />
+                    </span>
+                    <span class="h-2 flex-1 rounded-full bg-border"></span>
+                    <span class="h-5 w-12 rounded-full" style={`background: ${tint(0.72, 0.15, 0.35)}`}></span>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-auto flex items-center gap-2 rounded-full border border-border bg-card px-3 py-2">
+                <span class="bx-caret h-3 w-px bg-foreground/70"></span>
+                <span class="h-2 flex-1 rounded-full bg-border"></span>
+                <span class="size-5 rounded-full" style={`background: ${tint(0.72, 0.15, 0.8)}`}></span>
+              </div>
+            </div>
+          ) : area.visual === 'automation' ? (
+            <div class="flex h-full w-full flex-col justify-center gap-4">
+              {[0, 1, 2].map((n) => (
+                <div class="flex items-center gap-3" style={`margin-left: ${n * 12}%`}>
+                  <span class="flex h-11 w-28 items-center gap-2 rounded-lg border border-border bg-card-muted/50 px-3">
+                    <span class="h-2 flex-1 rounded-full bg-border"></span>
+                    <span class="bx-done text-success" style={`animation-delay: ${n * 0.8}s`}><Icon name="check" size={14} /></span>
+                  </span>
+                  <span class="relative h-px w-14 shrink-0 bg-border-strong">
+                    <span class="bx-packet absolute -top-[3px] left-0 size-[7px] rounded-full" style={`background: ${tint(0.75, 0.16, 1)}; animation-delay: ${n * 0.8}s`}></span>
+                  </span>
+                  <span class="bx-node size-9 rounded-full" style={`background: ${tint(0.72, 0.15, 0.4 + n * 0.2)}; animation-delay: ${n * 0.8}s`}></span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class={`flex h-full w-full flex-col overflow-hidden border border-border bg-card-muted/30 ${area.visual === 'desktop' ? 'rounded-lg shadow-lg' : 'rounded-md'}`}>
+              <div class="flex items-center gap-1.5 border-b border-border px-3 py-2.5">
+                <span class="size-2.5 rounded-full bg-border-strong"></span>
+                <span class="size-2.5 rounded-full bg-border-strong"></span>
+                <span class="size-2.5 rounded-full bg-border-strong"></span>
+                {area.visual === 'desktop'
+                  ? <span class="mx-auto h-2 w-20 rounded-full bg-border"></span>
+                  : <span class="ml-3 h-2.5 w-32 rounded-full bg-card-muted"></span>}
+                {area.visual === 'store' && (
+                  <span class="relative ml-auto text-muted-foreground">
+                    <Icon name="cart" size={16} />
+                    <span class="bx-badge absolute -right-1.5 -top-1.5 size-2.5 rounded-full" style={`background: ${tint(0.72, 0.17, 1)}`}></span>
+                  </span>
+                )}
+              </div>
+              {area.visual === 'store' ? (
+                <div class="grid flex-1 grid-cols-3 gap-3 p-3">
+                  {[0, 1, 2, 3, 4, 5].map((n) => (
+                    <div class="bx-lift flex flex-col gap-1.5" style={`animation-delay: ${n * 0.5}s`}>
+                      <span class="flex-1 rounded-md" style={`background: ${tint(0.72, 0.15, 0.15 + (n % 3) * 0.15)}`}></span>
+                      <span class="h-1.5 w-3/4 rounded-full bg-border"></span>
+                      <span class="h-1.5 w-1/3 rounded-full" style={`background: ${tint(0.72, 0.15, 0.7)}`}></span>
+                    </div>
+                  ))}
+                </div>
+              ) : area.visual === 'desktop' ? (
+                <div class="grid flex-1 grid-cols-[5rem_1fr] gap-3 p-3">
+                  <div class="flex flex-col gap-2 rounded-md bg-card-muted/60 p-2">
+                    {[0, 1, 2, 3, 4].map((n) => (
+                      <span class="flex items-center gap-1.5">
+                        <span class="size-2.5 rounded-sm" style={`background: ${tint(0.72, 0.15, n === 0 ? 0.8 : 0.3)}`}></span>
+                        <span class="h-1.5 flex-1 rounded-full bg-border"></span>
+                      </span>
+                    ))}
+                  </div>
+                  <div class="relative flex flex-col gap-1.5">
+                    <!-- selection highlight stepping down the list -->
+                    <span class="bx-select absolute inset-x-0 top-0 h-[calc((100%-2.25rem)/7)] rounded-md" style={`background: ${tint(0.72, 0.15, 0.25)}`}></span>
+                    {[0, 1, 2, 3, 4, 5, 6].map(() => (
+                      <div class="relative flex flex-1 items-center gap-3 rounded-md px-2">
+                        <span class="size-4 rounded-sm bg-border"></span>
+                        <span class="h-1.5 w-2/5 rounded-full bg-border"></span>
+                        <span class="ml-auto h-1.5 w-12 rounded-full bg-border"></span>
+                      </div>
+                    ))}
+                    <!-- cursor -->
+                    <svg class="bx-cursor absolute left-1/2 top-1/3 size-4 drop-shadow" viewBox="0 0 24 24" fill="currentColor" style="color: var(--foreground)">
+                      <path d="M4 2l16 9-7 2-3 7z" />
+                    </svg>
+                  </div>
+                </div>
+              ) : (
+                <div class="grid flex-1 grid-cols-[4rem_1fr] gap-3 p-3">
+                  <div class="flex flex-col gap-2.5 rounded-md bg-card-muted/60 p-2">
+                    <span class="h-2 rounded-full" style={`background: ${tint(0.72, 0.15, 0.8)}`}></span>
+                    <span class="h-2 rounded-full bg-border"></span>
+                    <span class="h-2 rounded-full bg-border"></span>
+                    <span class="h-2 w-2/3 rounded-full bg-border"></span>
+                  </div>
+                  <div class="flex flex-col gap-3">
+                    <div class="grid grid-cols-3 gap-2">
+                      {[0, 1, 2].map((n) => (
+                        <div class="flex flex-col gap-1.5 rounded-md border border-border bg-card p-2">
+                          <span class="h-1.5 w-1/2 rounded-full bg-border"></span>
+                          <span class="bx-kpi h-2.5 w-3/4 origin-left rounded-full" style={`background: ${tint(0.72, 0.15, 0.35 + n * 0.2)}; animation-delay: ${n * 0.6}s`}></span>
+                        </div>
+                      ))}
+                    </div>
+                    <div class="flex flex-1 items-end gap-1.5 rounded-md border border-border bg-card p-2">
+                      {[40, 65, 50, 80, 60, 90, 72].map((h, k) => (
+                        <span class="bx-bar flex-1 origin-bottom rounded-sm" style={`height: ${h}%; background: ${tint(0.72, 0.15, 0.55)}; animation-delay: ${k * -0.35}s`}></span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Only run the illustration loops while they are on screen.
+  const scopes = document.querySelectorAll<HTMLElement>('[data-bx]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.target.classList.toggle('is-playing', e.isIntersecting)),
+      { rootMargin: '100px 0px' },
+    );
+    scopes.forEach((el) => io.observe(el));
+  } else {
+    scopes.forEach((el) => el.classList.add('is-playing'));
+  }
+</script>
+
+<style>
+  /*
+   * Playful, looping illustration motion.
+   * - transform/opacity only, so every frame stays on the compositor
+   * - strong custom curves: ease-out for entrances, ease-in-out for on-screen moves,
+   *   linear for constant flow; never ease-in
+   * - paused while off screen, and off entirely under prefers-reduced-motion
+   */
+  [data-bx] {
+    --bx-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --bx-io: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  :global(.js) [data-bx]:not(.is-playing) [class*='bx-'],
+  :global(.js) [data-bx]:not(.is-playing) [class*='bx-']::after {
+    animation-play-state: paused;
+  }
+
+  .bx-float { animation: bx-float 6s ease-in-out infinite; }
+  @keyframes bx-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  .bx-toast { animation: bx-toast 5s var(--bx-out) infinite; }
+  @keyframes bx-toast {
+    0%, 8% { transform: translateY(-140%); opacity: 0; }
+    16%, 52% { transform: translateY(0); opacity: 1; }
+    /* exit is subtler than the entrance: shorter travel, fade out */
+    58%, 100% { transform: translateY(-40%); opacity: 0; }
+  }
+
+  .bx-row { animation: bx-row 5s var(--bx-out) infinite; }
+  @keyframes bx-row {
+    0%, 55% { transform: none; opacity: 1; }
+    60% { transform: translateX(6px); opacity: 0; }
+    61% { transform: translateY(8px); opacity: 0; }
+    70%, 100% { transform: none; opacity: 1; }
+  }
+
+  .bx-shine::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / .35) 50%, transparent 70%);
+    transform: translateX(-120%);
+    animation: bx-shine 4s var(--bx-io) infinite;
+  }
+  @keyframes bx-shine { 0%, 60% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+  .bx-heart { animation: bx-heart 3s var(--bx-out) infinite; }
+  @keyframes bx-heart { 0%, 70%, 100% { transform: scale(1); } 78% { transform: scale(1.4); } 86% { transform: scale(.95); } }
+
+  .bx-pulse { animation: bx-pulse 2.4s ease-in-out infinite; }
+  @keyframes bx-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+
+  .bx-tab { animation: bx-tab 8s var(--bx-io) infinite; }
+  @keyframes bx-tab {
+    0%, 20% { transform: translateX(0); } 25%, 45% { transform: translateX(100%); }
+    50%, 70% { transform: translateX(200%); } 75%, 95% { transform: translateX(300%); }
+    100% { transform: translateX(0); }
+  }
+
+  .bx-glow { animation: bx-glow 3.6s var(--bx-out) infinite; }
+  @keyframes bx-glow { 0%, 30%, 100% { transform: scale(1); } 12% { transform: scale(1.06); } }
+
+  /* The card is 28% of the board; columns sit ~33% apart, i.e. ~119% of the card's own width. */
+  .bx-travel { animation: bx-travel 6s var(--bx-io) infinite; }
+  @keyframes bx-travel {
+    0%, 12% { transform: translateX(0) rotate(-4deg); }
+    40%, 52% { transform: translateX(119%) rotate(3deg); }
+    80%, 92% { transform: translateX(238%) rotate(-2deg); }
+    100% { transform: translateX(0) rotate(-4deg); }
+  }
+
+  /* Agent chat: question → typing → answer → action card, then loop. */
+  .bx-seq-1 { animation: bx-seq-1 7s var(--bx-out) infinite; }
+  .bx-seq-typing { animation: bx-seq-typing 7s var(--bx-out) infinite; }
+  .bx-seq-2 { animation: bx-seq-2 7s var(--bx-out) infinite; }
+  .bx-seq-3 { animation: bx-seq-3 7s var(--bx-out) infinite; }
+  @keyframes bx-seq-1 { 0% { opacity: 0; transform: translateY(8px); } 6%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes bx-seq-typing { 0%, 10% { opacity: 0; } 14%, 32% { opacity: 1; } 36%, 100% { opacity: 0; } }
+  @keyframes bx-seq-2 { 0%, 34% { opacity: 0; transform: translateY(8px); } 40%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes bx-seq-3 { 0%, 50% { opacity: 0; transform: scale(.95); } 56%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
+  .bx-dot { animation: bx-dot 1s ease-in-out infinite; }
+  @keyframes bx-dot { 0%, 100% { transform: translateY(0); opacity: .4; } 40% { transform: translateY(-3px); opacity: 1; } }
+
+  .bx-caret { animation: bx-caret 1s steps(1) infinite; }
+  @keyframes bx-caret { 50% { opacity: 0; } }
+
+  /* Automation: tasks tick off, a packet travels the wire (constant flow → linear), the node lights up. */
+  .bx-packet { animation: bx-packet 2.4s linear infinite; }
+  @keyframes bx-packet {
+    0%, 10% { transform: translateX(0); opacity: 0; }
+    15% { opacity: 1; }
+    55% { transform: translateX(calc(3.5rem - 7px)); opacity: 1; }
+    60%, 100% { transform: translateX(calc(3.5rem - 7px)); opacity: 0; }
+  }
+  .bx-node { animation: bx-node 2.4s var(--bx-out) infinite; }
+  @keyframes bx-node { 0%, 55% { transform: scale(1); } 63% { transform: scale(1.15); } 80%, 100% { transform: scale(1); } }
+  .bx-done { display: inline-flex; animation: bx-done 2.4s var(--bx-out) infinite; }
+  @keyframes bx-done { 0%, 5% { transform: scale(.5); opacity: 0; } 14% { transform: scale(1.15); opacity: 1; } 20%, 85% { transform: scale(1); opacity: 1; } 100% { transform: scale(.9); opacity: 0; } }
+
+  /* Store: tiles take turns lifting, cart badge bounces. */
+  .bx-lift { animation: bx-lift 3s ease-in-out infinite; }
+  @keyframes bx-lift { 0%, 30%, 100% { transform: none; } 12% { transform: translateY(-6px) scale(1.03); } }
+  .bx-badge { animation: bx-badge 1.5s var(--bx-out) infinite; }
+  @keyframes bx-badge { 0%, 60%, 100% { transform: scale(1); } 72% { transform: scale(1.4); } 86% { transform: scale(.95); } }
+
+  /* Desktop: selection steps down the list (like arrow keys) while the cursor drifts. */
+  .bx-select { animation: bx-select 7s steps(1) infinite; }
+  @keyframes bx-select {
+    0% { transform: translateY(0); } 14% { transform: translateY(calc(100% + .375rem)); }
+    28% { transform: translateY(calc(200% + .75rem)); } 42% { transform: translateY(calc(300% + 1.125rem)); }
+    57% { transform: translateY(calc(400% + 1.5rem)); } 71% { transform: translateY(calc(500% + 1.875rem)); }
+    85% { transform: translateY(calc(600% + 2.25rem)); }
+  }
+  .bx-cursor { animation: bx-cursor 7s var(--bx-io) infinite; }
+  @keyframes bx-cursor {
+    0%, 100% { transform: translate(0, -80%); } 25% { transform: translate(30%, 20%); }
+    50% { transform: translate(-20%, 120%); } 75% { transform: translate(40%, 200%); }
+  }
+
+  /* Web app dashboard: bars breathe, KPIs fill. */
+  .bx-bar { animation: bx-bar 2.8s ease-in-out infinite; }
+  @keyframes bx-bar { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.6); } }
+  .bx-kpi { animation: bx-kpi 3.6s ease-in-out infinite; }
+  @keyframes bx-kpi { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.55); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    [class*='bx-'], [class*='bx-']::after { animation: none !important; }
+    .bx-seq-typing { opacity: 0; }
+  }
+</style>
