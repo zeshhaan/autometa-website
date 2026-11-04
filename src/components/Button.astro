@@ -42,7 +42,14 @@ const sizes = {
   lg: 'h-12 px-6 text-base',
 };
 
-const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+// Optical balance: the side with an icon gets slightly less padding than the text side.
+const iconSide = {
+  sm: { left: 'pl-2.5', right: 'pr-2.5' },
+  md: { left: 'pl-4', right: 'pr-4' },
+  lg: { left: 'pl-5', right: 'pr-5' },
+};
+const iconPadding = [icon ? iconSide[size].left : '', iconRight ? iconSide[size].right : ''].join(' ');
+const classes = `${base} ${variants[variant]} ${sizes[size]} ${iconPadding} ${className}`;
 const iconSize = size === 'lg' ? 18 : 16;
 const Tag = href ? 'a' : 'button';
 const extra = href

@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 import { site } from '../data/site';
 
 const waNumber = site.whatsapp.replace(/[^0-9]/g, '');
-const waHref = `https://wa.me/${waNumber}?text=${encodeURIComponent("Hi Autometa, I'd like to talk about software for my business.")}`;
+const waHref = `https://wa.me/${waNumber}?text=${encodeURIComponent("Hi Autometa, I’d like to talk about a product I want to build.")}`;
 const telHref = `tel:${site.whatsapp.replace(/[^0-9+]/g, '')}`;
 ---
 
@@ -49,10 +49,10 @@ const telHref = `tel:${site.whatsapp.replace(/[^0-9+]/g, '')}`;
       </span>
       <div>
         <h2 id="contact-modal-title" class="text-balance text-lg font-medium tracking-tight text-foreground">
-          Let's see how your business runs
+          Let’s talk about what you’re building
         </h2>
         <p class="mt-1.5 text-pretty text-sm leading-relaxed text-muted-foreground">
-          Call or WhatsApp anytime. We can also visit your shop or business, see how you work, and show you what to build.
+          Call or WhatsApp anytime. Tell us the idea or the problem, and we’ll tell you how we’d approach it.
         </p>
       </div>
     </div>
@@ -72,14 +72,14 @@ const telHref = `tel:${site.whatsapp.replace(/[^0-9+]/g, '')}`;
         href={waHref}
         target="_blank"
         rel="noopener noreferrer"
-        class="group flex items-center gap-3 rounded-lg bg-[#25D366] p-3.5 text-white transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
+        class="group flex items-center gap-3 rounded-lg bg-[#25D366] p-3.5 text-[#04301a] transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
       >
-        <span class="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/20">
+        <span class="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/35">
           <Icon name="whatsapp" size={20} />
         </span>
         <span class="flex-1 text-left">
           <span class="block text-sm font-semibold">Message on WhatsApp</span>
-          <span class="block text-xs text-white/80">Chat or arrange a visit, anytime</span>
+          <span class="block text-xs text-[#04301a]/80">Chat about your idea, anytime</span>
         </span>
         <Icon name="arrow-right" size={18} class="transition-transform duration-200 group-hover:translate-x-0.5" />
       </a>
@@ -102,7 +102,7 @@ const telHref = `tel:${site.whatsapp.replace(/[^0-9+]/g, '')}`;
     <!-- Footer -->
     <div class="px-6 pb-6">
       <p class="text-center text-xs text-muted-foreground">
-        You reach the team that builds the software, not a call centre.
+        You reach the team that builds the product, not a call centre.
       </p>
     </div>
   </div>
@@ -121,7 +121,7 @@ const telHref = `tel:${site.whatsapp.replace(/[^0-9+]/g, '')}`;
   #contact-modal .modal-panel {
     opacity: 0;
     scale: 0.96;
-    transform-origin: bottom right;
+    transform-origin: center;
     transition: opacity 0.22s var(--ease-smooth), scale 0.22s var(--ease-smooth);
     will-change: transform, opacity;
   }
