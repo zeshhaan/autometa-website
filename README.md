@@ -41,6 +41,7 @@ src/
   pages/
     index.astro             ← single-page landing (hero, what we build, industries,
                                 capabilities, integrations, why, process, FAQ, contact)
+    solutions/[slug].astro  ← unlinked detail page per product (getStaticPaths)
     404.astro
 public/fonts/           ← Instrument Sans + Monaspace Neon (self-hosted)
 public/og.png           ← social share image
@@ -58,7 +59,8 @@ Almost everything lives in `src/data/site.ts`.
 - `industries`: the industries we have built for.
 - `capabilities`: the disciplines we deliver with.
 
-The old `/solutions/*` pages were removed; `astro.config.mjs` redirects them to `/#build`.
+- `products`: detailed pages generated at `/solutions/<slug>` by `src/pages/solutions/[slug].astro`.
+  They stay reachable by URL but are deliberately not linked from the nav, homepage or footer.
 
 ## Before going live: replace these placeholders
 
