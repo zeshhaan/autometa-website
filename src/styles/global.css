@@ -167,6 +167,15 @@
   }
 }
 
+/* Applied for a single frame while the theme flips, so every element changes
+   colour together instead of some fading (navbar, links) and others snapping. */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
 /* ----------------------------------------------------------------------------
    Utilities & keyframes
 ---------------------------------------------------------------------------- */

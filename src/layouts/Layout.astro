@@ -22,7 +22,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://autometa.ae
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="dark" style="color-scheme: dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,8 +43,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://autometa.ae
     <meta name="twitter:image" content={image} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#0c0d12" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#f7f7fa" media="(prefers-color-scheme: light)" />
+    <!-- Updated by the theme scripts to match the chosen theme, not the OS one. -->
+    <meta name="theme-color" content="#0c0d12" />
 
     <link rel="preload" href="/fonts/InstrumentSans.ttf" as="font" type="font/ttf" crossorigin />
 
@@ -52,13 +52,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://autometa.ae
     <script is:inline>
       (() => {
         document.documentElement.classList.add('js');
+        let isLight = false;
         try {
-          const stored = localStorage.getItem('theme');
-          const isLight = stored === 'light';
-          document.documentElement.classList.toggle('dark', !isLight);
-        } catch (e) {
-          document.documentElement.classList.add('dark');
-        }
+          isLight = localStorage.getItem('theme') === 'light';
+        } catch (e) {}
+        const root = document.documentElement;
+        root.classList.toggle('dark', !isLight);
+        root.style.colorScheme = isLight ? 'light' : 'dark';
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute('content', isLight ? '#f7f7fa' : '#0c0d12');
       })();
     </script>
   </head>
