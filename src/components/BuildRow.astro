@@ -1,0 +1,183 @@
+---
+import Icon from './Icon.astro';
+import type { BuildArea } from '../data/site';
+
+interface Props {
+  area: BuildArea;
+  index?: number;
+}
+const { area, index = 0 } = Astro.props;
+const reversed = index % 2 === 1;
+const tint = (l: number, c: number, a = 1) => `oklch(${l} ${c} ${area.accentHue} / ${a})`;
+---
+
+<div class="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+  <!-- Copy -->
+  <div class={`reveal flex flex-col ${reversed ? 'md:order-2' : ''}`}>
+    <div class="flex items-center gap-3">
+      <span
+        class="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-card-muted"
+        style={`color: ${tint(0.72, 0.15)}`}
+      >
+        <Icon name={area.icon} size={20} />
+      </span>
+      <span class="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">{area.eyebrow}</span>
+    </div>
+    <h3 class="mt-5 text-balance text-2xl font-medium tracking-tight text-foreground md:text-3xl">{area.title}</h3>
+    <p class="mt-3 text-pretty text-base leading-relaxed text-muted-foreground">{area.description}</p>
+    <ul class="mt-6 grid gap-2.5">
+      {area.points.map((pt) => (
+        <li class="flex items-start gap-2 text-sm text-foreground/85">
+          <Icon name="check" size={16} class="mt-0.5 shrink-0 text-success" />
+          <span>{pt}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Visual: a real screenshot / photo when provided, otherwise a styled mock for the platform -->
+  <div class={`reveal ${reversed ? 'md:order-1' : ''}`} style="--reveal-delay: 120ms">
+    <div class="relative overflow-hidden rounded-xl border border-border bg-card shadow-xl card-highlight">
+      <div
+        class="pointer-events-none absolute -right-20 -top-20 size-64 rounded-full blur-3xl"
+        style={`background: ${tint(0.7, 0.16, 0.18)}`}
+      ></div>
+      {area.image ? (
+        <img
+          src={area.image.src}
+          alt={area.image.alt}
+          loading="lazy"
+          decoding="async"
+          class="relative aspect-[4/3] w-full object-cover"
+        />
+      ) : (
+        <div class="relative flex aspect-[4/3] items-center justify-center p-6" aria-hidden="true">
+          {area.visual === 'phone' ? (
+            <div class="flex h-full items-center gap-4">
+              {[0, 1].map((n) => (
+                <div class={`flex h-full w-36 flex-col gap-2.5 rounded-[1.6rem] border-4 border-border-strong bg-card-muted/50 p-3 ${n === 1 ? 'mt-10 hidden sm:flex' : ''}`}>
+                  <span class="mx-auto h-1.5 w-10 rounded-full bg-border-strong"></span>
+                  <span class="h-16 rounded-xl" style={`background: ${tint(0.72, 0.15, 0.45)}`}></span>
+                  <span class="h-2 w-3/4 rounded-full bg-border"></span>
+                  <span class="h-2 w-1/2 rounded-full bg-border"></span>
+                  <div class="mt-auto grid grid-cols-2 gap-2">
+                    <span class="h-10 rounded-lg bg-border"></span>
+                    <span class="h-10 rounded-lg bg-border"></span>
+                  </div>
+                  <span class="h-7 rounded-full" style={`background: ${tint(0.72, 0.15, 0.8)}`}></span>
+                </div>
+              ))}
+            </div>
+          ) : area.visual === 'consult' ? (
+            <div class="grid h-full w-full grid-cols-3 gap-3">
+              {['Discover', 'Define', 'Plan'].map((label, n) => (
+                <div class="flex flex-col gap-2 rounded-lg border border-border bg-card-muted/40 p-3">
+                  <span class="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span>
+                  {Array.from({ length: 4 - n }).map((_, k) => (
+                    <span class="h-8 rounded-md border border-border" style={`background: ${tint(0.72, 0.15, k === 0 ? 0.45 : 0.12)}`}></span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ) : area.visual === 'agent' ? (
+            <div class="flex h-full w-full flex-col gap-3 rounded-lg border border-border bg-card-muted/40 p-4">
+              <div class="ml-auto w-2/3 rounded-xl rounded-br-sm px-3 py-2" style={`background: ${tint(0.72, 0.15, 0.35)}`}>
+                <span class="block h-2 w-full rounded-full bg-foreground/30"></span>
+              </div>
+              <div class="flex w-5/6 flex-col gap-2 rounded-xl rounded-bl-sm border border-border bg-card p-3">
+                <span class="h-2 w-full rounded-full bg-border"></span>
+                <span class="h-2 w-4/5 rounded-full bg-border"></span>
+                <div class="mt-1 flex items-center gap-2 rounded-md border border-border p-2">
+                  <span class="size-6 rounded-md" style={`background: ${tint(0.72, 0.15, 0.7)}`}></span>
+                  <span class="h-2 flex-1 rounded-full bg-border"></span>
+                </div>
+              </div>
+              <div class="mt-auto flex items-center gap-2 rounded-full border border-border bg-card px-3 py-2">
+                <span class="h-2 flex-1 rounded-full bg-border"></span>
+                <span class="size-5 rounded-full" style={`background: ${tint(0.72, 0.15, 0.8)}`}></span>
+              </div>
+            </div>
+          ) : area.visual === 'automation' ? (
+            <div class="flex h-full w-full flex-col justify-center gap-4">
+              {[0, 1, 2].map((n) => (
+                <div class="flex items-center gap-3" style={`margin-left: ${n * 12}%`}>
+                  <span class="flex h-11 w-28 items-center rounded-lg border border-border bg-card-muted/50 px-3">
+                    <span class="h-2 w-full rounded-full bg-border"></span>
+                  </span>
+                  <span class="h-px w-8 bg-border-strong"></span>
+                  <span class="size-9 rounded-full" style={`background: ${tint(0.72, 0.15, 0.4 + n * 0.2)}`}></span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class={`flex h-full w-full flex-col overflow-hidden border border-border bg-card-muted/30 ${area.visual === 'desktop' ? 'rounded-lg shadow-lg' : 'rounded-md'}`}>
+              <div class="flex items-center gap-1.5 border-b border-border px-3 py-2.5">
+                <span class="size-2.5 rounded-full bg-border-strong"></span>
+                <span class="size-2.5 rounded-full bg-border-strong"></span>
+                <span class="size-2.5 rounded-full bg-border-strong"></span>
+                {area.visual === 'desktop'
+                  ? <span class="mx-auto h-2 w-20 rounded-full bg-border"></span>
+                  : <span class="ml-3 h-2.5 w-32 rounded-full bg-card-muted"></span>}
+              </div>
+              {area.visual === 'store' ? (
+                <div class="grid flex-1 grid-cols-3 gap-3 p-3">
+                  {[0, 1, 2, 3, 4, 5].map((n) => (
+                    <div class="flex flex-col gap-1.5">
+                      <span class="flex-1 rounded-md" style={`background: ${tint(0.72, 0.15, 0.15 + (n % 3) * 0.15)}`}></span>
+                      <span class="h-1.5 w-3/4 rounded-full bg-border"></span>
+                      <span class="h-1.5 w-1/3 rounded-full" style={`background: ${tint(0.72, 0.15, 0.7)}`}></span>
+                    </div>
+                  ))}
+                </div>
+              ) : area.visual === 'desktop' ? (
+                <div class="grid flex-1 grid-cols-[5rem_1fr] gap-3 p-3">
+                  <div class="flex flex-col gap-2 rounded-md bg-card-muted/60 p-2">
+                    {[0, 1, 2, 3, 4].map((n) => (
+                      <span class="flex items-center gap-1.5">
+                        <span class="size-2.5 rounded-sm" style={`background: ${tint(0.72, 0.15, n === 0 ? 0.8 : 0.3)}`}></span>
+                        <span class="h-1.5 flex-1 rounded-full bg-border"></span>
+                      </span>
+                    ))}
+                  </div>
+                  <div class="flex flex-col gap-1.5">
+                    {[0, 1, 2, 3, 4, 5, 6].map((n) => (
+                      <div class={`flex items-center gap-3 rounded-md px-2 py-2 ${n === 1 ? '' : 'border border-transparent'}`} style={n === 1 ? `background: ${tint(0.72, 0.15, 0.25)}` : ''}>
+                        <span class="size-4 rounded-sm bg-border"></span>
+                        <span class="h-1.5 w-2/5 rounded-full bg-border"></span>
+                        <span class="ml-auto h-1.5 w-12 rounded-full bg-border"></span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div class="grid flex-1 grid-cols-[4rem_1fr] gap-3 p-3">
+                  <div class="flex flex-col gap-2.5 rounded-md bg-card-muted/60 p-2">
+                    <span class="h-2 rounded-full" style={`background: ${tint(0.72, 0.15, 0.8)}`}></span>
+                    <span class="h-2 rounded-full bg-border"></span>
+                    <span class="h-2 rounded-full bg-border"></span>
+                    <span class="h-2 w-2/3 rounded-full bg-border"></span>
+                  </div>
+                  <div class="flex flex-col gap-3">
+                    <div class="grid grid-cols-3 gap-2">
+                      {[0, 1, 2].map((n) => (
+                        <div class="flex flex-col gap-1.5 rounded-md border border-border bg-card p-2">
+                          <span class="h-1.5 w-1/2 rounded-full bg-border"></span>
+                          <span class="h-2.5 w-3/4 rounded-full" style={`background: ${tint(0.72, 0.15, 0.35 + n * 0.2)}`}></span>
+                        </div>
+                      ))}
+                    </div>
+                    <div class="flex flex-1 items-end gap-1.5 rounded-md border border-border bg-card p-2">
+                      {[40, 65, 50, 80, 60, 90, 72].map((h) => (
+                        <span class="flex-1 rounded-sm" style={`height: ${h}%; background: ${tint(0.72, 0.15, 0.55)}`}></span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
-import { site, products } from '../data/site';
+import { site, capabilities } from '../data/site';
 
 const year = new Date().getFullYear();
 ---
@@ -26,28 +26,28 @@ const year = new Date().getFullYear();
         </a>
       </div>
 
-      <nav class="flex flex-col gap-3" aria-label="Solutions">
-        <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Solutions</h3>
-        {products.map((p) => (
-          <a href={`/solutions/${p.slug}`} class="text-sm text-foreground/75 transition-colors hover:text-foreground">
-            {p.name}
+      <nav class="flex flex-col gap-3" aria-label="Capabilities">
+        <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Capabilities</h3>
+        {capabilities.map((c) => (
+          <a href="/#capabilities" class="text-sm text-foreground/75 transition-colors hover:text-foreground">
+            {c.name}
           </a>
         ))}
       </nav>
 
       <nav class="flex flex-col gap-3" aria-label="Company">
         <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Company</h3>
-        <a href="/#services" class="text-sm text-foreground/75 transition-colors hover:text-foreground">Services</a>
+        <a href="/#build" class="text-sm text-foreground/75 transition-colors hover:text-foreground">What we build</a>
         <a href="/#why" class="text-sm text-foreground/75 transition-colors hover:text-foreground">Why Autometa</a>
-        <a href="/#work" class="text-sm text-foreground/75 transition-colors hover:text-foreground">Work</a>
+        <a href="/#process" class="text-sm text-foreground/75 transition-colors hover:text-foreground">How we work</a>
         <a href="/#faq" class="text-sm text-foreground/75 transition-colors hover:text-foreground">FAQ</a>
         <a href="/#contact" class="text-sm text-foreground/75 transition-colors hover:text-foreground">Contact</a>
       </nav>
     </div>
 
     <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-      <p>© {year} Autometa. Operations software for growing businesses.</p>
-      <p class="font-mono">Built for practical business workflows</p>
+      <p>© {year} Autometa. World-class products, built end to end.</p>
+      <p class="font-mono">Strategy · Design · Engineering · Growth</p>
     </div>
   </div>
 </footer>
