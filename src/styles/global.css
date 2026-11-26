@@ -53,9 +53,20 @@
   --card-highlight: oklch(0.9225 0.0014 var(--base-hue));
 
   --radius-base: 0.175rem;
-  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Motion tokens (Emil Kowalski's curves). ease-out for anything entering or
+     exiting, ease-in-out for things moving on screen, plain ease for colour.
+     Never ease-in on UI: it delays the exact moment the user is watching. */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out-quad: var(--ease-out-strong);
+  --ease-smooth: var(--ease-drawer);
   --ease-navbar: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --duration-press: 160ms;
+
+  /* Lets height transition to/from `auto` (FAQ accordion). */
+  interpolate-size: allow-keywords;
 
   --shadow-sm: 0px 1px 1px -0.5px rgba(0, 0, 0, 0.15), 0px 3px 3px -1.5px rgba(0, 0, 0, 0.05);
   --shadow-md: 0px 1px 1px -0.5px rgba(0, 0, 0, 0.15), 0px 3px 3px -1.5px rgba(0, 0, 0, 0.05), 0px 6px 6px -3px rgba(0, 0, 0, 0.05);
@@ -128,6 +139,10 @@
   --ease-smooth: var(--ease-smooth);
   --ease-out-quad: var(--ease-out-quad);
   --ease-navbar: var(--ease-navbar);
+  /* Override Tailwind's weak defaults so every `ease-out` / `ease-in-out`
+     utility on the site gets the strong curves. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
   --animate-shiny-text: shiny-text 8s infinite;
   --animate-marquee: marquee var(--duration, 40s) linear infinite;
@@ -224,41 +239,86 @@
 }
 
 /* Scroll-reveal: progressive enhancement, only hidden when JS is active, so
-   content is fully visible without JS (SEO / no-JS / resilience). */
-.js .reveal {
+   content is fully visible without JS (SEO / no-JS / resilience).
+   It is a one-shot keyframe on `transform`, not a transition, so it never
+   overrides an element's own hover transitions (card lift uses `translate`,
+   a separate property) and leaves nothing behind once it has played. */
+.js .reveal:not(.is-visible) {
   opacity: 0;
-  transform: translateY(16px);
-  filter: blur(4px);
-  transition: opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-smooth),
-    filter 0.6s var(--ease-smooth);
-  transition-delay: var(--reveal-delay, 0ms);
 }
 
 .js .reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
+  animation: reveal-in 0.6s var(--ease-drawer) var(--reveal-delay, 0ms) backwards;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .js .reveal {
-    opacity: 1;
-    transform: none;
-    filter: none;
-    transition: none;
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
   }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* FAQ accordion: the answer grows open instead of teleporting in. Browsers
+   without ::details-content / interpolate-size simply open instantly. */
+.faq-item::details-content {
+  block-size: 0;
+  opacity: 0;
+  overflow-y: clip;
+  transition:
+    block-size 0.25s var(--ease-out-strong),
+    opacity 0.2s var(--ease-out-strong),
+    content-visibility 0.25s allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+}
+
+/* Theme toggle: the incoming icon rotates in. Only after the user has clicked,
+   so it never plays on page load. */
+[data-theme-toggle][data-animated] .theme-icon {
+  animation: theme-icon-in 0.3s var(--ease-out-strong);
+}
+
+@keyframes theme-icon-in {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+    filter: blur(2px);
+  }
+}
+
+/* Reduced motion means gentler, not zero: keep fades and colour changes that
+   help comprehension, drop movement, stop decorative loops. Hover lifts are
+   already gated with `motion-safe:` in markup. */
+@media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  /* Global safety net: neutralise all motion for users who ask for less. */
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  .js .reveal.is-visible {
+    animation: reveal-fade 0.3s ease backwards;
+  }
+
+  [data-theme-toggle][data-animated] .theme-icon {
+    animation-name: reveal-fade;
+  }
+
+  .faq-item::details-content {
+    transition: opacity 0.2s ease, content-visibility 0.2s allow-discrete;
+  }
+
+  .shiny-text,
+  .animate-ping {
+    animation: none;
   }
 }
 

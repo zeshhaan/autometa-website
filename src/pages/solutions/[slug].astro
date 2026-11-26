@@ -174,7 +174,7 @@ const secondaryCta = product.cta?.secondary;
       {otherProducts.map((p, i) => (
         <a
           href={`/solutions/${p.slug}`}
-          class="reveal group flex flex-col gap-2 rounded-xl border border-border bg-card p-6 transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-border-strong active:scale-[0.99] card-highlight"
+          class="reveal group flex flex-col gap-2 rounded-xl border border-border bg-card p-6 transition-[translate,scale,border-color] duration-200 ease-out motion-safe:hover:-translate-y-0.5 hover:border-border-strong active:scale-[0.99] card-highlight"
           style={`--reveal-delay: ${i * 70}ms`}
         >
           <span class="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-card-muted" style={`color: oklch(0.72 0.15 ${p.accentHue})`}>
@@ -183,7 +183,7 @@ const secondaryCta = product.cta?.secondary;
           <h3 class="mt-1 text-base font-medium text-foreground">{p.name}</h3>
           <p class="text-sm leading-relaxed text-muted-foreground">{p.summary}</p>
           <span class="mt-1 inline-flex items-center gap-1 text-sm font-medium text-foreground transition-colors group-hover:text-accent">
-            Explore <Icon name="arrow-right" size={15} class="transition-transform group-hover:translate-x-0.5" />
+            Explore <Icon name="arrow-right" size={15} class="transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-0.5" />
           </span>
         </a>
       ))}
