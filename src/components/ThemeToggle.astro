@@ -5,11 +5,11 @@ import Icon from './Icon.astro';
 <button
   type="button"
   data-theme-toggle
-  class="inline-flex size-9 cursor-pointer items-center justify-center rounded-md text-foreground/80 transition-[color,background-color,transform] duration-150 ease-out hover:bg-card-muted hover:text-foreground active:scale-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/60"
+  class="inline-flex size-9 cursor-pointer items-center justify-center rounded-md text-foreground/80 transition-[color,background-color,scale] duration-150 ease-out hover:bg-card-muted hover:text-foreground active:scale-[0.95] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/60"
   aria-label="Toggle colour theme"
 >
-  <Icon name="sun" size={18} class="hidden dark:block" />
-  <Icon name="moon" size={18} class="block dark:hidden" />
+  <Icon name="sun" size={18} class="theme-icon hidden dark:block" />
+  <Icon name="moon" size={18} class="theme-icon block dark:hidden" />
 </button>
 
 <script>
@@ -37,6 +37,11 @@ import Icon from './Icon.astro';
   document.querySelectorAll('[data-theme-toggle]').forEach((el) => {
     el.setAttribute('aria-pressed', String(root.classList.contains('dark')));
     el.addEventListener('click', () => {
+      // Opt in to the icon entrance only once the user has clicked, so it
+      // never plays on page load.
+      document
+        .querySelectorAll('[data-theme-toggle]')
+        .forEach((t) => t.setAttribute('data-animated', ''));
       const next = root.classList.contains('dark') ? 'light' : 'dark';
       apply(next);
       try {

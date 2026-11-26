@@ -37,19 +37,19 @@ import { navLinks } from '../data/site';
       <button
         id="nav-menu-btn"
         type="button"
-        class="inline-flex size-9 cursor-pointer items-center justify-center rounded-md text-foreground/80 transition-transform duration-150 ease-out hover:bg-card-muted active:scale-[0.96] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/60"
+        class="relative inline-flex size-9 cursor-pointer items-center justify-center rounded-md text-foreground/80 transition-[background-color,scale] duration-150 ease-out hover:bg-card-muted active:scale-[0.95] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/60"
         aria-label="Open menu"
         aria-expanded="false"
         aria-controls="nav-mobile"
       >
-        <span id="nav-icon-open"><Icon name="menu" size={20} /></span>
-        <span id="nav-icon-close" class="hidden"><Icon name="x" size={20} /></span>
+        <span class="nav-icon nav-icon-open"><Icon name="menu" size={20} /></span>
+        <span class="nav-icon nav-icon-close"><Icon name="x" size={20} /></span>
       </button>
     </div>
   </div>
 
   <!-- Mobile menu -->
-  <div id="nav-mobile" class="absolute top-full left-0 mt-2 hidden w-full px-2 md:hidden">
+  <div id="nav-mobile" class="absolute top-full left-0 mt-2 w-full px-2 md:hidden">
     <div class="mx-auto max-w-5xl rounded-lg border border-border bg-card/90 p-3 shadow-lg backdrop-blur-md">
       <div class="flex flex-col">
         {navLinks.map((link) => (
@@ -84,6 +84,69 @@ import { navLinks } from '../data/site';
       max-width 0.3s var(--ease-navbar);
   }
 
+  /*
+   * Mobile menu: grows out of the menu button (top right) instead of popping
+   * in. Hidden with `visibility` so the exit can animate too, and so closed
+   * links stay out of the tab order. Enter 200ms, exit 150ms.
+   */
+  #nav-mobile {
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear 0.15s;
+  }
+  #nav-mobile > div {
+    opacity: 0;
+    scale: 0.97;
+    translate: 0 -4px;
+    transform-origin: top right;
+    transition:
+      opacity 0.15s var(--ease-out-strong),
+      scale 0.15s var(--ease-out-strong),
+      translate 0.15s var(--ease-out-strong);
+  }
+  #nav-mobile.is-open {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+  #nav-mobile.is-open > div {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0;
+    transition-duration: 0.2s;
+  }
+
+  /* Menu / close icons cross-fade in place rather than swapping. */
+  .nav-icon {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    transition:
+      opacity 0.15s var(--ease-out-strong),
+      scale 0.15s var(--ease-out-strong),
+      filter 0.15s var(--ease-out-strong);
+  }
+  .nav-icon-close,
+  [aria-expanded='true'] .nav-icon-open {
+    opacity: 0;
+    scale: 0.6;
+    filter: blur(2px);
+  }
+  [aria-expanded='true'] .nav-icon-close {
+    opacity: 1;
+    scale: 1;
+    filter: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #nav-mobile > div,
+    .nav-icon {
+      scale: 1 !important;
+      translate: 0 0 !important;
+    }
+  }
+
   /* Mobile: the pill is always elevated for legibility */
   @media (max-width: 1023px) {
     .navbar {
@@ -114,17 +177,13 @@ import { navLinks } from '../data/site';
 
   const btn = document.getElementById('nav-menu-btn');
   const menu = document.getElementById('nav-mobile');
-  const iconOpen = document.getElementById('nav-icon-open');
-  const iconClose = document.getElementById('nav-icon-close');
   const setOpen = (open: boolean) => {
     if (!menu || !btn) return;
-    menu.classList.toggle('hidden', !open);
+    menu.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', String(open));
     btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    iconOpen?.classList.toggle('hidden', open);
-    iconClose?.classList.toggle('hidden', !open);
   };
-  btn?.addEventListener('click', () => setOpen(menu?.classList.contains('hidden') ?? true));
+  btn?.addEventListener('click', () => setOpen(!menu?.classList.contains('is-open')));
   menu?.querySelectorAll('.nav-mobile-link').forEach((el) =>
     el.addEventListener('click', () => setOpen(false)),
   );
